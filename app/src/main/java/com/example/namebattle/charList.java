@@ -2,11 +2,10 @@ package com.example.namebattle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -24,7 +23,7 @@ public class charList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_char_list);
 
-        Button returnButton = findViewById(R.id.button6);
+        Button returnButton = findViewById(R.id.modoru);
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,39 +32,30 @@ public class charList extends AppCompatActivity {
         });
 
         // リスト項目のもととなる値を準備する
-        ArrayList<String> subjects = new ArrayList<String>(){
+        ArrayList<String> name = new ArrayList<String>(){
             {
-                add("國ちゃん");
-                add("数ちゃん");
-                add("かっちゃん");
-                add("ちびちゃん");
 
             }
         };
         ArrayList<String> comments = new ArrayList<String>(){
             {
-                add("言語午後ご");
-                add("経緯いいさんんん");
-                add("勝ちっっっっっま");
-                add("ちょせええええええ");
 
             }
         };
         ArrayList<String> saramis = new ArrayList<String>(){
             {
-                add("シャア");
-                add("ジム");
-                add("ドム");
-                add("ガンダム");
 
             }
         };
 
+
+
+
         // ListViewに表示するリスト項目をArrayListで準備する
         List<Map<String, String>> data = new ArrayList<Map<String, String>>();
-        for (int i=0; i<subjects.size(); i++){
+        for (int i=0; i<name.size(); i++){
             Map<String, String> item = new HashMap<String, String>();
-            item.put("Subject", subjects.get(i));
+            item.put("Name", name.get(i));
             item.put("Comment", comments.get(i));
             item.put("Saramis", saramis.get(i));
             data.add(item);
@@ -90,8 +80,19 @@ public class charList extends AppCompatActivity {
 
 
 
+        Button CharButton = findViewById(R.id.createbotton);
+        CharButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
 
+                Intent intent = new Intent(getApplication(), creat.class);
+                startActivity(intent);
+                
+
+            }
+
+        });
 
 
 

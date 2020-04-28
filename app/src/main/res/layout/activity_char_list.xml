@@ -17,7 +17,7 @@
         android:layout_marginBottom="0dp">
 
         <Button
-            android:id="@+id/button_left"
+            android:id="@+id/createbotton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
@@ -44,7 +44,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button6"
+            android:id="@+id/modoru"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@color/colorPrimaryDark"
