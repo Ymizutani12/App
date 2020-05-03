@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".Complete"></activity>
+        <activity android:name=".syousai"></activity>
+        <activity android:name=".Complete" />
         <activity android:name=".creat" />
         <activity android:name=".charList" />
         <activity android:name=".MainActivity">

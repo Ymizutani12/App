@@ -5,4 +5,7 @@
     <color name="colorAccent">#D81B60</color>
     <color name="white">#FFFFFF</color>
     <color name="gra">#F5CDCBCB</color>
+    <color name="denger">#513D00</color>
+    <color name="red">#F3414A</color>
+    <color name="brack">#000000</color>
 </resources>

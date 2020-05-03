@@ -26,7 +26,7 @@ public class Complete extends AppCompatActivity {
 
         Button returnButton = findViewById(R.id.modoru);
         Button Return = findViewById(R.id.mouikai);
-        Button owari = findViewById(R.id.finish);
+        Button owari = findViewById(R.id.delete);
 
         Intent i = getIntent();
         String charaname = i.getStringExtra("NAME");
@@ -83,7 +83,7 @@ public class Complete extends AppCompatActivity {
         // 忘れずに！
         cursor.close();
 
-        textView = findViewById(R.id.nametext);
+        textView = findViewById(R.id.statustext);
         textView.setText(sbuilder.toString());
 
         Return.setOnClickListener(new View.OnClickListener() {
