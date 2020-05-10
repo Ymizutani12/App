@@ -36,7 +36,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="83dp"
         android:layout_marginBottom="1dp"
-        android:layout_weight="1" />
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,8 +53,8 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/textView14"
-            android:layout_width="match_parent"
+            android:id="@+id/subtitle"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/gra"

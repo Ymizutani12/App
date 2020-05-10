@@ -20,11 +20,16 @@ import java.util.Map;
 
 public class charList extends AppCompatActivity {
 
+
+    //各変数の宣言
+
     private CustomOpenHelper helper;
     private SQLiteDatabase db;
-    ArrayList<String> name = new ArrayList<String>(){};
-    ArrayList<String> job = new ArrayList<String>(){};
-    ArrayList<String> status = new ArrayList<String>(){};
+
+    //ステータスを表示するためのリスト
+    private ArrayList<String> name ;
+    private ArrayList<String> job ;
+    private ArrayList<String> status ;
 
 
     @Override
@@ -32,6 +37,9 @@ public class charList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_char_list);
 
+
+
+        //戻るボタンで一つ前のアクティビティ
         Button returnButton = findViewById(R.id.modoru);
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +48,30 @@ public class charList extends AppCompatActivity {
             }
         });
 
+
+        //作成するボタンでキャラ作成画面へ移行
+        Button CharButton = findViewById(R.id.createbotton);
+        CharButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplication(), creat.class);
+                startActivity(intent);
+                
+
+            }
+
+        });
+
+    }
+
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        //何も入ってなければいれる
         if(helper == null){
             helper = new CustomOpenHelper(getApplicationContext());
         }
@@ -49,6 +81,7 @@ public class charList extends AppCompatActivity {
         }
 
 
+        //データテーブルから取り出すもの、条件を指定
         Cursor cursor = db.query(
                 "CHARACTERS",
                 new String[] { "name","job","hp","mp","str","def","agi" },
@@ -61,6 +94,12 @@ public class charList extends AppCompatActivity {
 
         cursor.moveToFirst();
 
+        //リスト初期化
+        name = new ArrayList<String>(){};
+        job = new ArrayList<String>(){};
+        status = new ArrayList<String>(){};
+
+        //入ってるデータをそれぞれのリストへ追加
         for (int i = 0; i < cursor.getCount(); i++) {
             name.add(cursor.getString(0));
             job.add(cursor.getString(1));
@@ -95,6 +134,8 @@ public class charList extends AppCompatActivity {
         ListView listView = findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
+
+        //リストを押した時にキャラ詳細画面に移行
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -102,26 +143,9 @@ public class charList extends AppCompatActivity {
                 intent.putExtra("POSITION",position);
 
                 startActivity(intent);
-                finish();
-            }
-        });
-
-
-
-        Button CharButton = findViewById(R.id.createbotton);
-        CharButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(getApplication(), creat.class);
-                startActivity(intent);
-                
 
             }
-
         });
-
-
 
     }
 }

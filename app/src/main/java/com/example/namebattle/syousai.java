@@ -10,12 +10,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class syousai extends AppCompatActivity {
 
+
+    //各変数の定義
     private CustomOpenHelper helper;
     private SQLiteDatabase db;
     private TextView textView;
     private String name;
+    DateFormat yyyymmddhhmm = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
 
 
@@ -24,8 +31,9 @@ public class syousai extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_syousai);
 
-        Intent listnumber = getIntent();
-        int position = listnumber.getIntExtra("POSITION",0);
+        //何番目を取得したか確認
+        Intent listNumber = getIntent();
+        int position = listNumber.getIntExtra("POSITION",0);
 
         Button returnButton = findViewById(R.id.modoru);
         Button Delete = findViewById(R.id.delete);
@@ -38,17 +46,10 @@ public class syousai extends AppCompatActivity {
             db = helper.getWritableDatabase();
         }
 
-        returnButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
         Cursor cursor = db.query(
                 "CHARACTERS",
-                new String[] { "name","job","hp","mp","str","def","agi","luck" },
+                new String[] { "name","job","hp","mp","str","def","agi","luck","create_at" },
                 null,
                 null,
                 null,
@@ -58,10 +59,12 @@ public class syousai extends AppCompatActivity {
 
         cursor.moveToFirst();
 
+        //カーソルを選択した番号に持っていく
         for (int i = 0; i < position; i++) {
             cursor.moveToNext();
         }
 
+        //表示
         StringBuilder sbuilder = new StringBuilder();
 
         sbuilder.append(cursor.getString(0));
@@ -79,33 +82,44 @@ public class syousai extends AppCompatActivity {
         sbuilder.append(cursor.getInt(6));
         sbuilder.append("\nLUCK\t");
         sbuilder.append(cursor.getInt(7));
-        sbuilder.append("\n");
+        sbuilder.append("\n\n作成日:");
+        sbuilder.append(convertLongToYyyymmddhhmm(cursor.getLong(8)));
 
 
         name = cursor.getString(0);
 
-        // 忘れずに！
         cursor.close();
-
-
 
 
         textView = findViewById(R.id.statustext);
         textView.setText(sbuilder.toString());
 
+        //削除メソッドの処理
         Delete.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 db.delete("CHARACTERS", "name = ?", new String[]{name});
 
-                Intent intent = new Intent(getApplication(), charList.class);
-                startActivity(intent);
+                finish();
+            }
+        });
 
+        //戻るボタンの処理
+        returnButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
                 finish();
             }
         });
 
 
+
+    }
+
+    //秒を指定した日付の型に変換するメソッド
+    public String convertLongToYyyymmddhhmm(Long date) {
+        return yyyymmddhhmm.format(new Date(date));
     }
 }
