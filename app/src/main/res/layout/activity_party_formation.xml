@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/tab_list"
+    android:orientation="vertical"
+    >
+
+    <!-- 最初に下部に置きたいボタンを含むレイアウトを配置 -->
+
+    <LinearLayout
+        android:id="@+id/bottom_control"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp">
+
+        <Button
+            android:id="@+id/battleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_weight="1"
+            android:text="このパーティで開始(0/3)" />
+
+    </LinearLayout>
+
+    <!-- 次にその上部へ重ならないように ListViewを配置する -->
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="704dp"
+        android:layout_above="@id/bottom_control"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="83dp"
+        android:layout_marginBottom="1dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="73dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/modoru"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark"
+            android:text="戻る"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/gra"
+            android:gravity="center"
+            android:text="パーティ編成"
+            android:textSize="24sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
+
+
+
+

@@ -29,5 +29,18 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        Button BattleButton = findViewById(R.id.battlebutton);
+        BattleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent = new Intent(getApplication(), PartyFormation.class);
+                startActivity(intent);
+
+            }
+
+        });
+
     }
 }
