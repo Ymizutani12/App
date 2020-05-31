@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -107,7 +106,7 @@ public class charList extends AppCompatActivity {
                     + " MP:" + cursor.getInt(3)
                     + " STR:" + cursor.getInt(4)
                     + " DEF:" + cursor.getInt(5)
-                    + " LUCK:" + cursor.getInt(6));
+                    + " AGI:" + cursor.getInt(6));
 
             cursor.moveToNext();
         }
@@ -128,7 +127,7 @@ public class charList extends AppCompatActivity {
         SimpleAdapter adapter = new SimpleAdapter(this, data,
                 R.layout.status,
                 new String[] { "Name", "Job" ,"Status"},
-                new int[] { R.id.namebox, R.id.jobbox,R.id.statusbox});
+                new int[] { R.id.NameBox, R.id.JobBox,R.id.StatusBox});
 
         // ListViewにArrayAdapterを設定する
         ListView listView = findViewById(R.id.listView);

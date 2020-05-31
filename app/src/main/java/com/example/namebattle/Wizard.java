@@ -20,6 +20,12 @@ public class Wizard extends Player {
 	// =======================
 	// Getter / Setter
 	// =======================
+	@Override
+	public String GetJOB(){
+
+		return "魔法使い";
+
+	}
 
 	// =======================
 	// protected メソッド

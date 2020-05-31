@@ -9,8 +9,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -35,7 +33,7 @@ public class PartyFormation extends AppCompatActivity {
     // Mapのキー
     private final String[] FROM = {"Name","Job","Status","Check"};
     // リソースのコントロールID
-    private final int[] TO = {R.id.namebox, R.id.jobbox,R.id.statusbox,R.id.checkBox};
+    private final int[] TO = {R.id.NameBox, R.id.JobBox,R.id.StatusBox,R.id.checkBox};
 
     // カスタムアダプター
     private class MyAdapter extends SimpleAdapter{
@@ -171,8 +169,51 @@ public class PartyFormation extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getApplication(), creat.class);
-                startActivity(intent);
+                int count=0 ;
+
+                for(int i=0 ; i < adapter.checkList.size(); i++) {
+
+                    if (adapter.checkList.get(i)) {
+                        count++;
+                    }
+                }
+
+                if(count >= 3){
+                    ArrayList<String> member = new ArrayList<String>();
+
+                    Cursor cursor = db.query(
+                            "CHARACTERS",
+                            new String[] { "name"},
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                    );
+
+                    cursor.moveToFirst();
+
+                    for (int i = 0; i < cursor.getCount(); i++) {
+
+                        if(adapter.checkList.get(i)){
+
+                            member.add(cursor.getString(0));
+                        }
+
+                        cursor.moveToNext();
+                    }
+
+                    cursor.close();
+
+
+                    Intent intent = new Intent(getApplication(), BattleStart.class);
+                    intent.putExtra("MEMBERLIST",member);
+                    startActivity(intent);
+                }else{
+
+                    Toast.makeText(getApplicationContext() , "パーティーメンバーを3人選んでください", Toast.LENGTH_LONG).show();
+                }
+
 
 
             }

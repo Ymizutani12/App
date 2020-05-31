@@ -106,6 +106,14 @@ public class Player {
 		return this.agi;
 	}
 
+	/**
+	 * 各職業でオーバーライド　職業名の取得
+	 * @return 職業
+	 */
+	public String GetJOB(){
+		return "";
+	}
+
 	// =======================
 	// protected メソッド
 	// =======================
@@ -150,10 +158,14 @@ public class Player {
 	// =======================
 	/**
 	 * 現在のステータスを System.out で表示する
+	 * @return
 	 */
-	public void PrintStatus() {
-		System.out.printf("%s (HP=%3d : MP=%3d : STR=%3d : DEF=%3d : LUCK=%3d : AGI=%3d)\n", this.GetName(),
-				this.GetHP(), this.GetMP(), this.GetSTR(), this.GetDEF(), this.GetLUCK(), this.GetAGI());
+	public String GetStatus() {
+		return ("HP:" + GetHP()
+				+ " MP:" + GetMP()
+				+ " STR:" + GetSTR()
+				+ " DEF:" + GetDEF()
+				+ " AGI:" + GetAGI());
 	}
 
 	/**

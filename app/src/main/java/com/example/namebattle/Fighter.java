@@ -18,6 +18,13 @@ public class Fighter extends Player {
 	// Getter / Setter
 	// =======================
 
+	@Override
+	public String GetJOB(){
+
+		return "戦士";
+
+	}
+
 	// =======================
 	// protected メソッド
 	// =======================

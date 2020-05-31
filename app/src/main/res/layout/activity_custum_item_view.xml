@@ -21,14 +21,14 @@
             android:focusable="false" />
 
         <TextView
-            android:id="@+id/namebox"
+            android:id="@+id/NameBox"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="10"
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/jobbox"
+            android:id="@+id/JobBox"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="4"
@@ -37,7 +37,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/statusbox"
+        android:id="@+id/StatusBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
