@@ -1,6 +1,9 @@
 package com.example.namebattle;
 
-public class Magic {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Magic implements Parcelable {
 
 	//インスタンス
 	//魔法名
@@ -48,7 +51,33 @@ public class Magic {
 		
 		
 	}
-	
-	
-	
+
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(this.name);
+		dest.writeInt(this.mp);
+	}
+
+	protected Magic(Parcel in) {
+		this.name = in.readString();
+		this.mp = in.readInt();
+	}
+
+	public static final Creator<Magic> CREATOR = new Creator<Magic>() {
+		@Override
+		public Magic createFromParcel(Parcel source) {
+			return new Magic(source);
+		}
+
+		@Override
+		public Magic[] newArray(int size) {
+			return new Magic[size];
+		}
+	};
 }

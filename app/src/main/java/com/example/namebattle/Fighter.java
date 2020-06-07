@@ -41,6 +41,7 @@ public class Fighter extends Player {
 		this.luck = GetNumber(3, 100) + 1;
 		this.agi = GetNumber(4, 50) + 1;
 		this.maxhp = this.hp;
+		this.maxmp = this.mp;
 	}
 
 	/**

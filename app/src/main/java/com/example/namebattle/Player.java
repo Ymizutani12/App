@@ -1,37 +1,43 @@
 package com.example.namebattle;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.widget.TextView;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Random;
 
 // プレイヤークラス(各種ジョブの基底クラス)
-public class Player {
+public class Player implements Parcelable {
 	// =======================
 	// フィールド変数
 	// =======================
 	// 名前
-	protected String name;
+	private String name;
 	// HP
-	protected int hp;
+	private int hp;
 	//最大HP
-	protected int maxhp;
+	private int maxhp;
 	//MP
-	protected int mp;
+	private int mp;
+	//最大MP
+	private int maxmp;
 	// 攻撃力
-	protected int str;
+	private int str;
 	// 防御力
-	protected int def;
+	private int def;
 	//運
-	protected int luck;
+	private int luck;
 	//素早さ
-	protected int agi;
+	private int agi;
 	//魔法リスト
-	protected ArrayList<Magic> magiclist;
+	private ArrayList<Magic> magiclist;
 	//麻痺
-	protected boolean paralys;
+	private boolean paralys;
 	//ポイズン
-	protected boolean poison;
+	private boolean poison;
 
 	// =======================
 	// コンストラクタ
@@ -67,6 +73,14 @@ public class Player {
 	}
 
 	/**
+	 * 最大HPを取得する
+	 * @return 最大HP
+	 */
+	public int GetMaxHP() {
+		return this.maxhp;
+	}
+
+	/**
 	 * 攻撃力を取得する
 	 * @return 攻撃力
 	 */
@@ -91,6 +105,14 @@ public class Player {
 	}
 
 	/**
+	 * 最大MPを取得する
+	 * @return 最大MP
+	 */
+	public int GetMaxMP() {
+		return this.maxmp;
+	}
+
+	/**
 	 * 運を取得する
 	 * @return 運
 	 */
@@ -112,6 +134,22 @@ public class Player {
 	 */
 	public String GetJOB(){
 		return "";
+	}
+
+	/**
+	 * 麻痺状態の取得
+	 * @return 麻痺状態
+	 */
+	public boolean GetParalys(){
+		return paralys;
+	}
+
+	/**
+	 * 毒状態の取得
+	 * @return 毒状態
+	 */
+	public boolean GetPoison(){
+		return poison;
 	}
 
 	// =======================
@@ -157,7 +195,7 @@ public class Player {
 	// public メソッド
 	// =======================
 	/**
-	 * 現在のステータスを System.out で表示する
+	 * 現在のステータスを返す
 	 * @return
 	 */
 	public String GetStatus() {
@@ -181,7 +219,7 @@ public class Player {
 	 * @param target : 対象プレイヤー
 	 * @return ダメージ値(0～)
 	 */
-	protected int CalcDamage(Player target) {
+	protected int CalcDamage(Player target, TextView log) {
 		Random r = new Random();
 		int damage;
 		//乱数で攻撃(最大値自分の攻撃力)
@@ -264,4 +302,51 @@ public class Player {
 		return;
 	}
 
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(this.name);
+		dest.writeInt(this.hp);
+		dest.writeInt(this.maxhp);
+		dest.writeInt(this.mp);
+		dest.writeInt(this.maxmp);
+		dest.writeInt(this.str);
+		dest.writeInt(this.def);
+		dest.writeInt(this.luck);
+		dest.writeInt(this.agi);
+		dest.writeTypedList(this.magiclist);
+		dest.writeByte(this.paralys ? (byte) 1 : (byte) 0);
+		dest.writeByte(this.poison ? (byte) 1 : (byte) 0);
+	}
+
+	protected Player(Parcel in) {
+		this.name = in.readString();
+		this.hp = in.readInt();
+		this.maxhp = in.readInt();
+		this.mp = in.readInt();
+		this.maxmp = in.readInt();
+		this.str = in.readInt();
+		this.def = in.readInt();
+		this.luck = in.readInt();
+		this.agi = in.readInt();
+		this.magiclist = in.createTypedArrayList(Magic.CREATOR);
+		this.paralys = in.readByte() != 0;
+		this.poison = in.readByte() != 0;
+	}
+
+	public static final Creator<Player> CREATOR = new Creator<Player>() {
+		@Override
+		public Player createFromParcel(Parcel source) {
+			return new Player(source);
+		}
+
+		@Override
+		public Player[] newArray(int size) {
+			return new Player[size];
+		}
+	};
 }

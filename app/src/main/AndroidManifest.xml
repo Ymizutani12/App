@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".BattleMain"></activity>
+        <activity android:name=".TacticsSelect"></activity>
+        <activity android:name=".BattleMain" />
         <activity android:name=".BattleStart" />
         <activity android:name=".PartyFormation" />
         <activity android:name=".syousai" />

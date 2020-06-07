@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -92,9 +93,9 @@ public class BattleStart extends AppCompatActivity {
         final TextView EnemyStatus1 = findViewById(R.id.EnemyStatusBox1),EnemyStatus2 = findViewById(R.id.EnemyStatusBox2),EnemyStatus3 = findViewById(R.id.EnemyStatusBox3);
 
         //自分のパーティ作成
-        Party AllyParty = new Party();
+        final Party AllyParty = new Party();
 
-        for(int i=0; i<name.size()-1; i++){
+        for(int i=0; i<name.size(); i++){
 
             switch (job.get(i)){
 
@@ -130,7 +131,7 @@ public class BattleStart extends AppCompatActivity {
 
 
         //敵パーティ作成
-        Party EnemyParty = new EnemyList().GetEnemy();
+        final Party EnemyParty = new EnemyList().GetEnemy();
 
         EnemyName1.setText(EnemyParty.GetPlayerName(0));
         EnemyName2.setText(EnemyParty.GetPlayerName(1));
@@ -182,9 +183,14 @@ public class BattleStart extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getApplication(), BattleStart.class);
-                startActivity(intent);
 
+                Intent intent = new Intent(getApplication(), BattleMain.class);
+
+                intent.putExtra("ALLYPARTY", AllyParty);
+
+                intent.putExtra("ENEMYPARTY",  EnemyParty);
+
+                startActivity(intent);
             }
         });
 

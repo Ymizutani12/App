@@ -88,7 +88,7 @@ public class creat extends AppCompatActivity {
     private void Createmethod(){
 
         // 選択されているラジオボタンの取得
-        RadioButton radioButton = findViewById(checkedId);// (Fragmentの場合は「getActivity().findViewById」にする)
+        RadioButton radioButton = findViewById(checkedId);
 
         // ラジオボタンのテキストを取得
         job = radioButton.getText().toString();
@@ -129,14 +129,14 @@ public class creat extends AppCompatActivity {
                 //各ステータスをそれぞれのテーブルに格納
                 Long nowTime = System.currentTimeMillis();
 
-                values.put("name",createplayer.name);
+                values.put("name",createplayer.GetName());
                 values.put("job",job);
-                values.put("hp",createplayer.hp);
-                values.put("mp",createplayer.mp);
-                values.put("str",createplayer.str);
-                values.put("def",createplayer.def);
-                values.put("agi",createplayer.agi);
-                values.put("luck",createplayer.luck);
+                values.put("hp",createplayer.GetHP());
+                values.put("mp",createplayer.GetMP());
+                values.put("str",createplayer.GetSTR());
+                values.put("def",createplayer.GetDEF());
+                values.put("agi",createplayer.GetAGI());
+                values.put("luck",createplayer.GetLUCK());
                 values.put("create_at",nowTime);
 
                 db.insert("CHARACTERS",null,values);
@@ -144,7 +144,7 @@ public class creat extends AppCompatActivity {
                 Intent intent = new Intent(getApplication(), Complete.class);
 
                 //次の画面でステータスを表示させるため名前を渡す
-                intent.putExtra("NAME",createplayer.name);
+                intent.putExtra("NAME",createplayer.GetName());
 
                 startActivity(intent);
                 finish();

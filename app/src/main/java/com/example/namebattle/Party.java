@@ -1,8 +1,11 @@
 package com.example.namebattle;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
-public class Party {
+public class Party implements Parcelable {
 
 	// =======================
 	// フィールド変数
@@ -15,8 +18,8 @@ public class Party {
 	private ArrayList<Tactics> TacticsList = new ArrayList<Tactics>() {
 		
 		{
-			add(new TacticsDefencelow());
 			add(new TacticsGangan());
+			add(new TacticsDefencelow());
 			add(new TacticsBattiri());
 			add(new TacticsSyuutyuu());
 			add(new TacticsImportantlife());
@@ -38,7 +41,7 @@ public class Party {
 	// Getter / Setter
 	// =======================
 
-	//パーティのプレイヤーステータスの表示
+	//パーティのプレイヤー名前の表示
 	protected String GetPlayerName(int i) {
 
 		if(0 <= i && (members.size()-1) >= i){
@@ -52,7 +55,7 @@ public class Party {
 
 	}
 
-	//パーティのプレイヤーステータスの表示
+	//パーティのプレイヤー職業の表示
 	protected String GetPlayerJob(int i) {
 
 		if(0 <= i && (members.size()-1) >= i){
@@ -70,14 +73,27 @@ public class Party {
 	protected String GetPlayerStatus(int i) {
 
 		if(0 <= i && (members.size()-1) >= i){
-
 			return members.get(i).GetStatus();
-
 		}else{
 			return "なし";
 		}
+	}
+
+	protected  String GetMenberStatus(){
+
+		StringBuilder strB = new StringBuilder();
+
+		for(Player p : members){
+
+			strB.append(p.GetStatus());
+		}
 
 
+	}
+
+	protected int GetTacticsNumber(){
+
+		return Tacticsnumber;
 	}
 	
 	/**
@@ -86,6 +102,16 @@ public class Party {
 	ArrayList<Player> GetMembers() {
 	return members;
 	}
+
+	//作戦セット
+	protected void SetTacticsNumber(int i){
+
+		Tacticsnumber = i ;
+
+	}
+
+
+
 	// =======================
 	// protected メソッド
 	// =======================
@@ -130,6 +156,35 @@ public class Party {
 		}
 		
 	}
-	
-	
+
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeTypedList(this.members);
+		dest.writeTypedList(this.TacticsList);
+		dest.writeInt(this.Tacticsnumber);
+	}
+
+	protected Party(Parcel in) {
+		this.members = in.createTypedArrayList(Player.CREATOR);
+		this.TacticsList = in.createTypedArrayList(Tactics.CREATOR);
+		this.Tacticsnumber = in.readInt();
+	}
+
+	public static final Creator<Party> CREATOR = new Creator<Party>() {
+		@Override
+		public Party createFromParcel(Parcel source) {
+			return new Party(source);
+		}
+
+		@Override
+		public Party[] newArray(int size) {
+			return new Party[size];
+		}
+	};
 }

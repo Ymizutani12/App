@@ -43,6 +43,7 @@ public class Wizard extends Player {
 		this.luck = GetNumber(3, 100) + 1;
 		this.agi = GetNumber(4, 40) + 20;
 		this.maxhp = this.hp;
+		this.maxmp = this.mp;
 		
 		MagicManegement mane = new MagicManegement();
 		this.magiclist = new ArrayList<Magic> (mane.WizardList);
