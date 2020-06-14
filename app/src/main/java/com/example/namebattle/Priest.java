@@ -57,23 +57,23 @@ public class Priest extends Player {
 	@Override
 	public void Attack(Player defender) {
 		// 与えるダメージを求める
-		System.out.println(GetName() + "の攻撃！");
+		BattleMain.BuildLog(GetName() + "の攻撃！");
 		int damage = CalcDamage(defender);
 
 		// 求めたダメージを対象プレイヤーに与える
 		//ダメージがない場合与えられないを表示
 		if (damage <= 0) {
 
-			System.out.println(GetName() + "はダメージを与えられない!");
+			BattleMain.BuildLog(GetName() + "はダメージを与えられない!");
 
 		} else {
-			System.out.println(defender.GetName() + "に" + damage + "のダメージ！");
+			BattleMain.BuildLog(defender.GetName() + "に" + damage + "のダメージ！");
 			defender.Damage(damage);
 		}
 
 		// 倒れた判定
 		if (defender.GetHP() <= 0) {
-			System.out.println(defender.GetName() + "は力尽きた...");
+			BattleMain.BuildLog(defender.GetName() + "は力尽きた...");
 		}
 	}
 
@@ -95,14 +95,14 @@ public class Priest extends Player {
 
 			if (list.get(magicnumber).mp <= this.GetMP()) {
 
-				System.out.println(this.GetName() + "の" + list.get(magicnumber).GetNAME() + "!");
+				BattleMain.BuildLog(this.GetName() + "の" + list.get(magicnumber).GetNAME() + "!");
 
 				list.get(magicnumber).Effect(effectplayer);
 				this.mp -= list.get(magicnumber).GetMP();
 
 				// 倒れた判定
 				if (effectplayer.GetHP() <= 0) {
-					System.out.println(effectplayer.GetName() + "は力尽きた...");
+					BattleMain.BuildLog(effectplayer.GetName() + "は力尽きた...");
 				}
 				return;
 			}
@@ -122,7 +122,7 @@ public class Priest extends Player {
 			
 			if(m instanceof MagicHeal && m.GetMP()<= this.mp) {
 				
-				System.out.println(this.GetName() + "の回復魔法");
+				BattleMain.BuildLog(this.GetName() + "の回復魔法");
 				m.Effect(effectplayer);
 				
 				this.mp -= m.GetMP();

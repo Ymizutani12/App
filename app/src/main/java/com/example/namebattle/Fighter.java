@@ -7,6 +7,8 @@ public class Fighter extends Player {
 	// フィールド変数
 	// =======================
 
+
+
 	// =======================
 	// コンストラクタ
 	// =======================
@@ -51,23 +53,23 @@ public class Fighter extends Player {
 	@Override
 	public void Attack(Player defender) {
 		// 与えるダメージを求める
-		System.out.println(GetName() + "の攻撃！");
+		BattleMain.BuildLog(GetName() + "の攻撃！");
 		int damage = CalcDamage(defender);
 
 		// 求めたダメージを対象プレイヤーに与える
 		//ダメージがない場合与えられないを表示
 		if (damage <= 0) {
 
-			System.out.println(GetName() + "はダメージを与えられない!");
+			BattleMain.BuildLog(GetName() + "はダメージを与えられない!");
 
 		} else {
-			System.out.println(defender.GetName() + "に" + damage + "のダメージ！");
+			BattleMain.BuildLog(defender.GetName() + "に" + damage + "のダメージ！");
 			defender.Damage(damage);
 		}
 
 		// 倒れた判定
 		if (defender.GetHP() <= 0) {
-			System.out.println(defender.GetName() + "は力尽きた...");
+			BattleMain.BuildLog(defender.GetName() + "は力尽きた...");
 		}
 	}
 

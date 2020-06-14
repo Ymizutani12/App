@@ -4,40 +4,41 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Random;
 
 // プレイヤークラス(各種ジョブの基底クラス)
-public class Player implements Parcelable {
+public class Player implements Serializable {
 	// =======================
 	// フィールド変数
 	// =======================
 	// 名前
-	private String name;
+	protected String name;
 	// HP
-	private int hp;
+	protected int hp;
 	//最大HP
-	private int maxhp;
+	protected int maxhp;
 	//MP
-	private int mp;
+	protected int mp;
 	//最大MP
-	private int maxmp;
+	protected int maxmp;
 	// 攻撃力
-	private int str;
+	protected int str;
 	// 防御力
-	private int def;
+	protected int def;
 	//運
-	private int luck;
+	protected int luck;
 	//素早さ
-	private int agi;
+	protected int agi;
 	//魔法リスト
-	private ArrayList<Magic> magiclist;
+	protected ArrayList<Magic> magiclist;
 	//麻痺
-	private boolean paralys;
+	protected boolean paralys;
 	//ポイズン
-	private boolean poison;
+	protected boolean poison;
 
 	// =======================
 	// コンストラクタ
@@ -152,6 +153,14 @@ public class Player implements Parcelable {
 		return poison;
 	}
 
+	/**
+	 * 魔法リストの取得
+	 * @return 魔法リスト
+	 */
+	public ArrayList<Magic> GetMagicList(){
+		return magiclist;
+	}
+
 	// =======================
 	// protected メソッド
 	// =======================
@@ -219,7 +228,7 @@ public class Player implements Parcelable {
 	 * @param target : 対象プレイヤー
 	 * @return ダメージ値(0～)
 	 */
-	protected int CalcDamage(Player target, TextView log) {
+	protected int CalcDamage(Player target) {
 		Random r = new Random();
 		int damage;
 		//乱数で攻撃(最大値自分の攻撃力)
@@ -227,7 +236,7 @@ public class Player implements Parcelable {
 		if (GetLUCK() > r.nextInt(100)) {
 
 			damage = GetSTR();
-			System.out.println(GetName() + "の会心の一撃!");
+			BattleMain.BuildLog(GetName() + "の会心の一撃!");
 		} else {
 			damage = r.nextInt(GetSTR()) - target.GetDEF();
 		}
@@ -281,7 +290,7 @@ public class Player implements Parcelable {
 		if (this.paralys) {
 			Random r = new Random();
 			if (r.nextInt(100) <= 20) {
-				System.out.println(this.GetName() + "は麻痺により動けない");
+				BattleMain.BuildLog(this.GetName() + "は麻痺により動けない");
 				return true;
 			}
 
@@ -295,13 +304,14 @@ public class Player implements Parcelable {
 	protected void AfterDamage() {
 		
 		if(this.poison) {
-			System.out.println(this.GetName() + "は毒によってダメージを受けている");
+			BattleMain.BuildLog(this.GetName() + "は毒によってダメージを受けている");
 			this.Damage(20);
 		}
 		
 		return;
 	}
 
+	/*
 	@Override
 	public int describeContents() {
 		return 0;
@@ -348,5 +358,5 @@ public class Player implements Parcelable {
 		public Player[] newArray(int size) {
 			return new Player[size];
 		}
-	};
+	};*/
 }

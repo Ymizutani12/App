@@ -3,7 +3,9 @@ package com.example.namebattle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Magic implements Parcelable {
+import java.io.Serializable;
+
+public class Magic implements Serializable {
 
 	//インスタンス
 	//魔法名
@@ -52,7 +54,7 @@ public class Magic implements Parcelable {
 		
 	}
 
-
+/*
 	@Override
 	public int describeContents() {
 		return 0;
@@ -79,5 +81,5 @@ public class Magic implements Parcelable {
 		public Magic[] newArray(int size) {
 			return new Magic[size];
 		}
-	};
+	};*/
 }

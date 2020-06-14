@@ -6,7 +6,9 @@ import java.util.Random;
 //命大事に作戦
 public class TacticsImportantlife extends Tactics {
 
-	//フィールド変数
+	protected TacticsImportantlife(){
+
+	}
 
 	//指示を出す
 	protected void Action(Player Actionplayer, ArrayList<Player> Attackmember, Party DefenceParty) {
@@ -16,7 +18,7 @@ public class TacticsImportantlife extends Tactics {
 		//HPが一番減っている人を選ぶ
 		for (Player p : Attackmember) {
 
-			if (lowHPplayer.maxhp - lowHPplayer.GetHP() < p.maxhp - p.GetHP()) {
+			if (lowHPplayer.GetMaxHP() - lowHPplayer.GetHP() < p.GetMaxHP() - p.GetHP()) {
 
 				lowHPplayer = p;
 
@@ -25,13 +27,13 @@ public class TacticsImportantlife extends Tactics {
 		}
 
 		//魔法があるか、HPが1でも減っている人がいれば回復魔法を探し回復
-		if (Actionplayer.magiclist.size() > 0 && lowHPplayer.maxhp - lowHPplayer.GetHP() > 0) {
+		if (Actionplayer.GetMagicList().size() > 0 && lowHPplayer.GetMaxHP() - lowHPplayer.GetHP() > 0) {
 
-			for (Magic m : Actionplayer.magiclist) {
+			for (Magic m : Actionplayer.GetMagicList()) {
 
 				if (m instanceof MagicHeal) {
 
-					if (Actionplayer.mp - m.GetMP() >= 0) {
+					if (Actionplayer.GetMP() - m.GetMP() >= 0) {
 						
 						Actionplayer.HealAction(lowHPplayer);
 						

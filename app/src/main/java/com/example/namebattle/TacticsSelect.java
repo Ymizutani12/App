@@ -33,23 +33,23 @@ public class TacticsSelect extends AppCompatActivity {
                     switch (checkedId){
 
                         case R.id.Gangan:
-                            BattleMain.AllyParty.SetTacticsNumber(0);
+                            BattleMain.TacticsNumber = 0 ;
                             break;
 
                         case R.id.DefenceLow:
-                            BattleMain.AllyParty.SetTacticsNumber(1);
+                            BattleMain.TacticsNumber = 1 ;
                             break;
 
                         case R.id.Battiri:
-                            BattleMain.AllyParty.SetTacticsNumber(2);
+                            BattleMain.TacticsNumber = 2 ;
                             break;
 
                         case R.id.Syuutyuu:
-                            BattleMain.AllyParty.SetTacticsNumber(3);
+                            BattleMain.TacticsNumber = 3 ;
                             break;
 
                         case R.id.ImportantLife:
-                            BattleMain.AllyParty.SetTacticsNumber(4);
+                            BattleMain.TacticsNumber = 4 ;
                             break;
                     }
 

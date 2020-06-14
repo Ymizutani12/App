@@ -10,15 +10,36 @@ public class GameManager {
 	//フィールド変数
 	private Party AllyParty,EnemyParty;
 	private ArrayList<Player> SpeedList;
-	private TextView BattleLog;
 	private int TurnNumber;
 
+	//味方パーティーを渡す
+	protected Party GetAlly(){
 
-	public GameManager(Party Party1,Party Party2,TextView t){
+		return AllyParty;
+
+	}
+
+	//敵パーティーを渡す
+	protected Party GetEnemy(){
+
+		return EnemyParty;
+
+	}
+
+
+	//作戦を変更させる
+	protected void SetTactics(int i){
+
+		AllyParty.SetTacticsNumber(i);
+
+		return;
+	}
+
+
+	public GameManager(Party Party1,Party Party2){
 
 		AllyParty = Party1;
 		EnemyParty = Party2;
-		BattleLog = t;
 		TurnNumber = 0;
 
 		SpeedList = new ArrayList<Player>() {
@@ -52,72 +73,84 @@ public class GameManager {
 
 	protected void TurnOne() {
 
-		StringBuilder log = new StringBuilder();
 
-		log.append(BattleLog.getText().toString());
+		if(TurnNumber == 0) {
+			BattleMain.BuildLog("======= バトル開始 =======\n");
+		}
 
-		log.append("======= バトル開始 =======\n");
+		TurnNumber += 1;
 
-		TurnNumber = TurnNumber++;
-
-		log.append("--------------------------------\n");
-		log.append("--- ターン" + TurnNumber + " ---\n");
+		BattleMain.BuildLog("----------------------------------------------------------------\n");
+		BattleMain.BuildLog("--- ターン" + TurnNumber + " ---\n");
 
 		// ■速い順ばんに攻撃
 		for (Player Attacker : SpeedList) {
 
-			//プレイヤーがどっちのチームか判定して攻撃
-			for (int i = 0; i < AllyParty.GetMembers().size(); i++) {
+			if(Attacker.GetHP() > 0 && !LifeJudge()) {
 
-				if (Attacker.GetName().equals(AllyParty.GetMembers().get(i).GetName())) {
+				//プレイヤーがどっちのチームか判定して攻撃
+				for (int i = 0; i < AllyParty.GetMembers().size(); i++) {
 
-					AllyParty.MemberAction(Attacker.GetName(), EnemyParty);
+					if (Attacker.GetName().equals(AllyParty.GetMembers().get(i).GetName())) {
 
-					//死亡者の確認と除名
-					for (Player deadP : EnemyParty.GetMembers()) {
+						AllyParty.MemberAction(Attacker.GetName(), EnemyParty);
 
-						if (deadP.GetHP() <= 0) {
-							EnemyParty.RemovePlayer(deadP);
-							break;
-						}
+					}
+
+				}
+
+				for (int i = 0; i < EnemyParty.GetMembers().size(); i++) {
+
+					if (Attacker.GetName().equals(EnemyParty.GetMembers().get(i).GetName())) {
+
+						EnemyParty.MemberAction(Attacker.GetName(), AllyParty);
 
 					}
 				}
-			}
 
-			for (int i = 0; i < EnemyParty.GetMembers().size(); i++) {
-
-				if (Attacker.GetName().equals(EnemyParty.GetMembers().get(i).GetName())) {
-
-					EnemyParty.MemberAction(Attacker.GetName(), EnemyParty);
-
-					for (Player deadP : EnemyParty.GetMembers()) {
-
-						if (deadP.GetHP() <= 0 ) {
-							EnemyParty.RemovePlayer(deadP);
-							break;
-						}
-
-					}
-				}
 			}
 
 		}
 
-		log.append("--------------------------------");
 
-		log.append("\n");
 
-		// ==================================================
-		// 終了処理
-		// ==================================================
+		BattleMain.BuildLog("----------------------------------------------------------------");
+
+		BattleMain.BuildLog("\n");
+
 	}
 
+
 //どちらかのパーティメンバーがゼロになったら終了
-			if (AllyParty.GetMembers().size() <= 0 || EnemyParty.GetMembers().size() <= 0) {
+	protected boolean LifeJudge(){
 
+		int count = 0;
 
-					}
+		for(Player deatP : AllyParty.GetMembers()){
+
+			if(deatP.GetHP() <= 0){
+				count++;
+			}
+		}
+		if(count == 3){
+			return true;
+		}
+
+		count = 0;
+
+		for(Player deatP : EnemyParty.GetMembers()){
+
+			if(deatP.GetHP() <= 0){
+				count++;
+			}
+		}
+		if(count == 3){
+			return true;
+		}
+
+		return false;
+
+	}
 
 
 }

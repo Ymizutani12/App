@@ -3,26 +3,26 @@ package com.example.namebattle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 //作戦クラス
-public class Tactics implements Parcelable {
+public class Tactics implements Serializable {
 
 	
 	//フィールド変数
+	int number;
 	
 	//指示を出す
 	protected void Action(Player Actionplayer,ArrayList<Player> Attackmember,Party DefenceParty) {
-		
+
 		//オーバーライド
-		
-		
 		
 		
 	}
 
 
-	public Tactics() {
+	/*public Tactics() {
 	}
 
 	@Override
@@ -47,5 +47,5 @@ public class Tactics implements Parcelable {
 		public Tactics[] newArray(int size) {
 			return new Tactics[size];
 		}
-	};
+	};*/
 }

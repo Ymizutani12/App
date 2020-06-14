@@ -13,19 +13,11 @@ public class Party implements Parcelable {
 	
 	//パーティが管理するメンバー
 	protected ArrayList<Player> members;
-	
+
+
+
 	//作戦一覧
-	private ArrayList<Tactics> TacticsList = new ArrayList<Tactics>() {
-		
-		{
-			add(new TacticsGangan());
-			add(new TacticsDefencelow());
-			add(new TacticsBattiri());
-			add(new TacticsSyuutyuu());
-			add(new TacticsImportantlife());
-		}
-		
-	}; 
+	protected ArrayList<Tactics> TacticsList;
 	
 	
 	//現在の作戦番号
@@ -36,6 +28,19 @@ public class Party implements Parcelable {
 	// =======================
 	Party() {
 	members = new ArrayList<Player>();
+
+	TacticsList = new ArrayList<Tactics>() {
+
+			{
+				add(new TacticsGangan());
+				add(new TacticsDefencelow());
+				add(new TacticsBattiri());
+				add(new TacticsSyuutyuu());
+				add(new TacticsImportantlife());
+			}
+
+		};
+
 	}
 	// =======================
 	// Getter / Setter
@@ -88,7 +93,7 @@ public class Party implements Parcelable {
 			strB.append(p.GetStatus());
 		}
 
-
+		return strB.toString();
 	}
 
 	protected int GetTacticsNumber(){
@@ -165,14 +170,16 @@ public class Party implements Parcelable {
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeTypedList(this.members);
-		dest.writeTypedList(this.TacticsList);
+		dest.writeList(this.members);
+		dest.writeList(this.TacticsList);
 		dest.writeInt(this.Tacticsnumber);
 	}
 
 	protected Party(Parcel in) {
-		this.members = in.createTypedArrayList(Player.CREATOR);
-		this.TacticsList = in.createTypedArrayList(Tactics.CREATOR);
+		this.members = new ArrayList<Player>();
+		in.readList(this.members, Player.class.getClassLoader());
+		this.TacticsList = new ArrayList<Tactics>();
+		in.readList(this.TacticsList, Tactics.class.getClassLoader());
 		this.Tacticsnumber = in.readInt();
 	}
 

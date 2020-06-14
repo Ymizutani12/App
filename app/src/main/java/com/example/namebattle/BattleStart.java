@@ -37,8 +37,6 @@ public class BattleStart extends AppCompatActivity {
         ArrayList<String> MemberList = intent.getStringArrayListExtra("MEMBERLIST");
 
 
-
-
         //何も入ってなければいれる
         if(helper == null){
             helper = new CustomOpenHelper(getApplicationContext());
@@ -182,7 +180,6 @@ public class BattleStart extends AppCompatActivity {
         buttlestart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
                 Intent intent = new Intent(getApplication(), BattleMain.class);
 

@@ -11,10 +11,13 @@ import android.widget.TextView;
 
 public class BattleMain extends AppCompatActivity {
 
-    static Party AllyParty;
+    Party AllyParty;
     Party EnemyParty;
     static TextView Log;
-
+    static int TacticsNumber;
+    GameManager GameMaster;
+    TextView MemberText1, MemberText2, MemberText3;
+    TextView EnemyText1 , EnemyText2 , EnemyText3 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,23 +25,52 @@ public class BattleMain extends AppCompatActivity {
         setContentView(R.layout.activity_battle_main);
 
         Button TacticsSelectChange = findViewById(R.id.TacticsButton);
+        Button NextTurnButton = findViewById(R.id.NextButton);
         AllyParty = getIntent().getParcelableExtra("ALLYPARTY");
         EnemyParty = getIntent().getParcelableExtra("ENEMYPARTY");
+
+
+        if(GameMaster == null ){
+
+            GameMaster = new GameManager(AllyParty,EnemyParty);
+
+        }
+
         Log = findViewById(R.id.BattleLog);
+        TacticsNumber = 0;
 
         TacticsSelectChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent intent = new Intent(getApplication(), TacticsSelect.class);
-
-                intent.putExtra("ALLYPARTY", AllyParty);
-
                 startActivity(intent);
 
             }
         });
 
+        NextTurnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                GameMaster.TurnOne();
+
+                MemberText1.setText(StatusBuilder(GameMaster.GetAlly().members.get(0)));
+                MemberText2.setText(StatusBuilder(GameMaster.GetAlly().members.get(1)));
+                MemberText3.setText(StatusBuilder(GameMaster.GetAlly().members.get(2)));
+
+                EnemyText1.setText(StatusBuilder(GameMaster.GetEnemy().members.get(0)));
+                EnemyText2.setText(StatusBuilder(GameMaster.GetEnemy().members.get(1)));
+                EnemyText3.setText(StatusBuilder(GameMaster.GetEnemy().members.get(2)));
+
+                if(GameMaster.LifeJudge()){
+                    Intent i = new Intent(getApplicationContext(),Result.class);
+                    startActivity(i);
+                    finish();
+                }
+
+            }
+        });
 
 
     }
@@ -48,26 +80,28 @@ public class BattleMain extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        TextView MemberText1 = findViewById(R.id.MemberBox1),MemberText2 = findViewById(R.id.MemberBox2),MemberText3 = findViewById(R.id.MemberBox3);
-        TextView EnemyText1 = findViewById(R.id.EnemyBox1),EnemyText2 = findViewById(R.id.EnemyBox2),EnemyText3 = findViewById(R.id.EnemyBox3);
+        MemberText1 = findViewById(R.id.MemberBox1);
+        MemberText2 = findViewById(R.id.MemberBox2);
+        MemberText3 = findViewById(R.id.MemberBox3);
+        EnemyText1 = findViewById(R.id.EnemyBox1);
+        EnemyText2 = findViewById(R.id.EnemyBox2);
+        EnemyText3 = findViewById(R.id.EnemyBox3);
 
-        AllyParty = getIntent().getParcelableExtra("ALLYPARTY");
-        EnemyParty = getIntent().getParcelableExtra("ENEMYPARTY");
+        GameMaster.SetTactics(TacticsNumber);
 
-        MemberText1.setText(StatusBuilder(AllyParty.members.get(0)));
-        MemberText2.setText(StatusBuilder(AllyParty.members.get(1)));
-        MemberText3.setText(StatusBuilder(AllyParty.members.get(2)));
+        MemberText1.setText(StatusBuilder(GameMaster.GetAlly().members.get(0)));
+        MemberText2.setText(StatusBuilder(GameMaster.GetAlly().members.get(1)));
+        MemberText3.setText(StatusBuilder(GameMaster.GetAlly().members.get(2)));
 
-
-        EnemyText1.setText(StatusBuilder(EnemyParty.members.get(0)));
-        EnemyText2.setText(StatusBuilder(EnemyParty.members.get(1)));
-        EnemyText3.setText(StatusBuilder(EnemyParty.members.get(2)));
+        EnemyText1.setText(StatusBuilder(GameMaster.GetEnemy().members.get(0)));
+        EnemyText2.setText(StatusBuilder(GameMaster.GetEnemy().members.get(1)));
+        EnemyText3.setText(StatusBuilder(GameMaster.GetEnemy().members.get(2)));
 
 
 
         TextView tactics = findViewById(R.id.Tactics);
 
-        switch (AllyParty.GetTacticsNumber()){
+        switch (GameMaster.GetAlly().GetTacticsNumber()){
 
             case 0:
                 tactics.setText("攻撃のみ");
@@ -122,17 +156,13 @@ public class BattleMain extends AppCompatActivity {
     }
 
 
-    protected void SetTactics(int i){
-
-        AllyParty.SetTacticsNumber(i);
-
-    }
-
     protected static void BuildLog(String log){
         StringBuilder BuilderLog = new StringBuilder();
 
-        BuilderLog.append(Log.getText().toString());
+        BuilderLog.append(Log.getText().toString() + "\n");
         BuilderLog.append(log);
+
+        Log.setText(BuilderLog);
 
         return;
     }
