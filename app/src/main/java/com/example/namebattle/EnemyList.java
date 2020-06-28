@@ -114,7 +114,7 @@ public class EnemyList {
                     p.AppendPlayer(new Priest(kari.get(taihi)));
                     break;
                 case 3:
-                    p.AppendPlayer(new Fighter(kari.get(taihi)));
+                    p.AppendPlayer(new Knight(kari.get(taihi)));
                     break;
             }
 

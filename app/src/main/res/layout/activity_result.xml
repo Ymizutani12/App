@@ -23,7 +23,7 @@
             android:layout_weight="0.5"
             android:background="@color/gra"
             android:gravity="center"
-            android:text="バトル"
+            android:text="バトル結果"
             android:textSize="24sp" />
 
         <LinearLayout
@@ -115,7 +115,7 @@
             android:textSize="18sp" />
 
         <Button
-            android:id="@+id/nextButton2"
+            android:id="@+id/BattleFinishButton"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_weight="0.8"

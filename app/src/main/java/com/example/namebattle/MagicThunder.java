@@ -24,8 +24,8 @@ public class MagicThunder extends Magic{
 				int damage = r.nextInt(20) + 10;
 				
 				effectplayer.Damage(damage);
-				
-				System.out.println(effectplayer.GetName() + "に" + damage + "のダメージ");
+
+				BattleMain.BuildLog(effectplayer.GetName() + "に" + damage + "のダメージ");
 				
 				return;
 				

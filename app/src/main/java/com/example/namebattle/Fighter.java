@@ -1,5 +1,7 @@
 package com.example.namebattle;
 
+import java.util.ArrayList;
+
 // プレイヤー：戦士
 public class Fighter extends Player {
 
@@ -44,6 +46,9 @@ public class Fighter extends Player {
 		this.agi = GetNumber(4, 50) + 1;
 		this.maxhp = this.hp;
 		this.maxmp = this.mp;
+		this.magiclist = new ArrayList<>();
+		this.paralys = false;
+		this.poison = false;
 	}
 
 	/**

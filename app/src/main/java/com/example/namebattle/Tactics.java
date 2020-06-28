@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
 
 //作戦クラス
 public class Tactics implements Serializable {
@@ -18,7 +19,26 @@ public class Tactics implements Serializable {
 
 		//オーバーライド
 		
-		
+	}
+
+	//攻撃するキャラをランダムで選ぶ
+	protected Player SelectPlayer(Party DefenceParty){
+
+		Random r = new Random();
+
+		int defnumber;
+
+		while(true){
+
+			defnumber = r.nextInt(DefenceParty.GetMembers().size());
+
+			if(DefenceParty.GetMembers().get(defnumber).GetHP() > 0 ){
+				break;
+			}
+
+		}
+
+		return DefenceParty.GetMembers().get(defnumber);
 	}
 
 

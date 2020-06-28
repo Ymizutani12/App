@@ -44,6 +44,7 @@ public class BattleMain extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(getApplication(), TacticsSelect.class);
+
                 startActivity(intent);
 
             }
@@ -65,6 +66,11 @@ public class BattleMain extends AppCompatActivity {
 
                 if(GameMaster.LifeJudge()){
                     Intent i = new Intent(getApplicationContext(),Result.class);
+
+                    i.putExtra("ALLYPARTY", GameMaster.GetAlly());
+
+                    i.putExtra("ENEMYPARTY",  GameMaster.GetEnemy());
+
                     startActivity(i);
                     finish();
                 }
@@ -108,15 +114,15 @@ public class BattleMain extends AppCompatActivity {
                 break;
 
             case 1:
-                tactics.setText("防御低い敵に集中");
+                tactics.setText("ガンガン攻撃");
                 break;
 
             case 2:
-                tactics.setText("バッチリ行動");
+                tactics.setText("バランスよく");
                 break;
 
             case 3:
-                tactics.setText("集中");
+                tactics.setText("集中攻撃");
                 break;
 
             case 4:
@@ -159,8 +165,8 @@ public class BattleMain extends AppCompatActivity {
     protected static void BuildLog(String log){
         StringBuilder BuilderLog = new StringBuilder();
 
-        BuilderLog.append(Log.getText().toString() + "\n");
-        BuilderLog.append(log);
+        BuilderLog.append(log + "\n");
+        BuilderLog.append(Log.getText().toString());
 
         Log.setText(BuilderLog);
 

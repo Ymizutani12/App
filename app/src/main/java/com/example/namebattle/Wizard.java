@@ -47,6 +47,9 @@ public class Wizard extends Player {
 		
 		MagicManegement mane = new MagicManegement();
 		this.magiclist = new ArrayList<Magic> (mane.WizardList);
+
+		this.paralys = false;
+		this.poison = false;
 	}
 
 	/**
@@ -105,6 +108,9 @@ public class Wizard extends Player {
     			}
     			return;
     		}
+
+    		list.remove(magicnumber);
+
     	}
     	
     	Attack(effectplayer);
@@ -113,13 +119,6 @@ public class Wizard extends Player {
     	return;
     	
     }
-	
 
-	// =======================
-	// private メソッド
-	// =======================
 
-	// =======================
-	// public メソッド
-	// =======================
 }

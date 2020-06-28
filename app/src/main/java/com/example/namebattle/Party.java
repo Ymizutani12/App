@@ -15,7 +15,6 @@ public class Party implements Parcelable {
 	protected ArrayList<Player> members;
 
 
-
 	//作戦一覧
 	protected ArrayList<Tactics> TacticsList;
 	
@@ -32,8 +31,8 @@ public class Party implements Parcelable {
 	TacticsList = new ArrayList<Tactics>() {
 
 			{
-				add(new TacticsGangan());
-				add(new TacticsDefencelow());
+				add(new TacticsAttackonly());
+				add(new TacticsFullAttack());
 				add(new TacticsBattiri());
 				add(new TacticsSyuutyuu());
 				add(new TacticsImportantlife());
@@ -71,7 +70,6 @@ public class Party implements Parcelable {
 			return "なし";
 		}
 
-
 	}
 
 	//パーティのプレイヤーステータスの表示
@@ -82,18 +80,6 @@ public class Party implements Parcelable {
 		}else{
 			return "なし";
 		}
-	}
-
-	protected  String GetMenberStatus(){
-
-		StringBuilder strB = new StringBuilder();
-
-		for(Player p : members){
-
-			strB.append(p.GetStatus());
-		}
-
-		return strB.toString();
 	}
 
 	protected int GetTacticsNumber(){
@@ -116,7 +102,6 @@ public class Party implements Parcelable {
 	}
 
 
-
 	// =======================
 	// protected メソッド
 	// =======================
@@ -136,16 +121,7 @@ public class Party implements Parcelable {
 		return;
 		
 	}
-	/**
-	* パーティーからプレイヤーを離脱させる
-	* @param player : 離脱させるプレイヤー
-	*/
-	public void RemovePlayer(Player player) {
-		
-		this.members.remove(player);
-		return;
-		
-	}
+
 	
 	//プレイヤーに行動させる
 	protected void MemberAction(String name,Party DefenceParty) {
@@ -160,6 +136,18 @@ public class Party implements Parcelable {
 			
 		}
 		
+	}
+
+	//ステータスリセット
+	protected void Reset(){
+
+		for(Player p : members){
+
+			p.Reset();
+
+		}
+
+
 	}
 
 

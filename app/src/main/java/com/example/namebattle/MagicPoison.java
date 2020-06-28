@@ -19,13 +19,13 @@ public class MagicPoison extends Magic {
 		//毒状態か確認して毒
 		if (effectplayer.poison == true) {
 
-			System.out.println(effectplayer.GetName() + "は毒にかかっている");
+			BattleMain.BuildLog(effectplayer.GetName() + "は毒にかかっている");
 
 		} else {
 
 			//毒付与
 			effectplayer.poison = true;
-			System.out.println(effectplayer.GetName() + "は毒にかかった");
+			BattleMain.BuildLog(effectplayer.GetName() + "は毒にかかった");
 		}
 
 		return;

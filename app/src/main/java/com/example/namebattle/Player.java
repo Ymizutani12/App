@@ -311,52 +311,10 @@ public class Player implements Serializable {
 		return;
 	}
 
-	/*
-	@Override
-	public int describeContents() {
-		return 0;
+	protected void Reset(){
+
+		MakeCharacter();
+
 	}
 
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(this.name);
-		dest.writeInt(this.hp);
-		dest.writeInt(this.maxhp);
-		dest.writeInt(this.mp);
-		dest.writeInt(this.maxmp);
-		dest.writeInt(this.str);
-		dest.writeInt(this.def);
-		dest.writeInt(this.luck);
-		dest.writeInt(this.agi);
-		dest.writeTypedList(this.magiclist);
-		dest.writeByte(this.paralys ? (byte) 1 : (byte) 0);
-		dest.writeByte(this.poison ? (byte) 1 : (byte) 0);
-	}
-
-	protected Player(Parcel in) {
-		this.name = in.readString();
-		this.hp = in.readInt();
-		this.maxhp = in.readInt();
-		this.mp = in.readInt();
-		this.maxmp = in.readInt();
-		this.str = in.readInt();
-		this.def = in.readInt();
-		this.luck = in.readInt();
-		this.agi = in.readInt();
-		this.magiclist = in.createTypedArrayList(Magic.CREATOR);
-		this.paralys = in.readByte() != 0;
-		this.poison = in.readByte() != 0;
-	}
-
-	public static final Creator<Player> CREATOR = new Creator<Player>() {
-		@Override
-		public Player createFromParcel(Parcel source) {
-			return new Player(source);
-		}
-
-		@Override
-		public Player[] newArray(int size) {
-			return new Player[size];
-		}
-	};*/
 }

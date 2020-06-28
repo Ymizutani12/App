@@ -48,6 +48,9 @@ public class Priest extends Player {
 
 		MagicManegement mane = new MagicManegement();
 		this.magiclist = new ArrayList<Magic>(mane.PriestList);
+
+		this.paralys = false;
+		this.poison = false;
 	}
 
 	/**
@@ -82,57 +85,70 @@ public class Priest extends Player {
 
 		Random r = new Random();
 		ArrayList<Magic> list = new ArrayList<Magic>(this.magiclist);
-		int magicnumber = 0;
+		int magicnumber=0;
 
 		//魔法をランダム選択してmp確認して使用
-		for (int i = 0; i < this.magiclist.size(); i++) {
+		for(int i=0; i<this.magiclist.size(); i++) {
 
-			if (list.size() <= 1) {
+			if(list.size()<=1) {
 				magicnumber = 0;
-			} else {
+			}else {
 				magicnumber = r.nextInt(list.size());
 			}
 
-			if (list.get(magicnumber).mp <= this.GetMP()) {
+			if(list.get(magicnumber).mp <= this.GetMP()) {
 
-				BattleMain.BuildLog(this.GetName() + "の" + list.get(magicnumber).GetNAME() + "!");
+				if(list.get(magicnumber) instanceof MagicHeal){
 
-				list.get(magicnumber).Effect(effectplayer);
-				this.mp -= list.get(magicnumber).GetMP();
+					HealAction(this,effectplayer);
+					return;
+				}else{
+					BattleMain.BuildLog(this.GetName() + "の" + list.get(magicnumber).GetNAME() +"!");
 
-				// 倒れた判定
-				if (effectplayer.GetHP() <= 0) {
-					BattleMain.BuildLog(effectplayer.GetName() + "は力尽きた...");
+					list.get(magicnumber).Effect(effectplayer);
+					this.mp -= list.get(magicnumber).GetMP();
+
+					return;
+
 				}
-				return;
+
 			}
+
+			list.remove(magicnumber);
+
 		}
 
 		Attack(effectplayer);
+
+		// 倒れた判定
+		if (effectplayer.GetHP() <= 0) {
+			BattleMain.BuildLog(effectplayer.GetName() + "は力尽きた...");
+		}
 
 		//オーバーライド
 		return;
-
 	}
 
 	//回復行動
-	protected void HealAction(Player effectplayer) {
+	protected void HealAction(Player effectplayer, Player defender) {
 
 		for(Magic m : this.magiclist) {
-			
+
 			if(m instanceof MagicHeal && m.GetMP()<= this.mp) {
-				
+
 				BattleMain.BuildLog(this.GetName() + "の回復魔法");
 				m.Effect(effectplayer);
-				
+
 				this.mp -= m.GetMP();
-				
+
+				return;
+
 			}
-			
+
 		}
-		
-		Attack(effectplayer);
-		//オーバーライド
+
+
+		Attack(defender);
 		return;
 
 	}

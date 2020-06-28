@@ -183,7 +183,7 @@ public class PartyFormation extends AppCompatActivity {
 
                     Cursor cursor = db.query(
                             "CHARACTERS",
-                            new String[] { "name"},
+                            new String[] { "name","job","hp","mp","str","def","agi" },
                             null,
                             null,
                             null,
@@ -204,7 +204,6 @@ public class PartyFormation extends AppCompatActivity {
                     }
 
                     cursor.close();
-
 
                     Intent intent = new Intent(getApplication(), BattleStart.class);
                     intent.putExtra("MEMBERLIST",member);

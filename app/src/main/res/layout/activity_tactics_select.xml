@@ -70,21 +70,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="防御が低い敵に集中" />
+                android:text="ガンガン攻める" />
 
             <RadioButton
                 android:id="@+id/Battiri"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="バッチリ行動" />
+                android:text="バランスよく" />
 
             <RadioButton
                 android:id="@+id/Syuutyuu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="集中" />
+                android:text="集中攻撃" />
 
             <RadioButton
                 android:id="@+id/ImportantLife"

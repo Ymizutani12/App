@@ -18,14 +18,14 @@ public class MagicParalys extends Magic {
 
 		//麻痺状態か確認して麻痺
 		if(effectplayer.paralys == true) {
-			
-			System.out.println(effectplayer.GetName() + "は麻痺にかかっている");
+
+			BattleMain.BuildLog(effectplayer.GetName() + "は麻痺にかかっている");
 			
 		}else {
 			
 			//麻痺付与
 			effectplayer.paralys = true;
-			System.out.println(effectplayer.GetName() + "は麻痺にかかった");
+			BattleMain.BuildLog(effectplayer.GetName() + "は麻痺にかかった");
 		}
 
 		return;

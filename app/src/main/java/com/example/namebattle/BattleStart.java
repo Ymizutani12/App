@@ -28,6 +28,10 @@ public class BattleStart extends AppCompatActivity {
     private ArrayList<String> job ;
     private ArrayList<String> status ;
 
+    TextView EnemyName1 , EnemyName2  ,EnemyName3 ;
+    TextView EnemyJob1 ,  EnemyJob2   ,EnemyJob3  ;
+    TextView EnemyStatus1,EnemyStatus2,EnemyStatus3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,9 +90,15 @@ public class BattleStart extends AppCompatActivity {
         TextView MemberJob1 = findViewById(R.id.MemberJobBox1),MemberJob2 = findViewById(R.id.MemberJobBox2),MemberJob3 = findViewById(R.id.MemberJobBox3);
         TextView MemberStatus1 = findViewById(R.id.MemberStatusBox1),MemberStatus2 = findViewById(R.id.MemberStatusBox2),MemberStatus3 = findViewById(R.id.MemberStatusBox3);
 
-        final TextView EnemyName1 = findViewById(R.id.EnemyNameBox1),EnemyName2 = findViewById(R.id.EnemyNameBox2),EnemyName3 = findViewById(R.id.EnemyNameBox3);
-        final TextView EnemyJob1 = findViewById(R.id.EnemyJobBox1),EnemyJob2 = findViewById(R.id.EnemyJobBox2),EnemyJob3 = findViewById(R.id.EnemyJobBox3);
-        final TextView EnemyStatus1 = findViewById(R.id.EnemyStatusBox1),EnemyStatus2 = findViewById(R.id.EnemyStatusBox2),EnemyStatus3 = findViewById(R.id.EnemyStatusBox3);
+        EnemyName1 = findViewById(R.id.EnemyNameBox1);
+        EnemyName2 = findViewById(R.id.EnemyNameBox2);
+        EnemyName3 = findViewById(R.id.EnemyNameBox3);
+        EnemyJob1 = findViewById(R.id.EnemyJobBox1);
+        EnemyJob2 = findViewById(R.id.EnemyJobBox2);
+        EnemyJob3 = findViewById(R.id.EnemyJobBox3);
+        EnemyStatus1 = findViewById(R.id.EnemyStatusBox1);
+        EnemyStatus2 = findViewById(R.id.EnemyStatusBox2);
+        EnemyStatus3 = findViewById(R.id.EnemyStatusBox3);
 
         //自分のパーティ作成
         final Party AllyParty = new Party();
@@ -107,6 +117,10 @@ public class BattleStart extends AppCompatActivity {
 
                 case "僧侶":
                     AllyParty.AppendPlayer(new Priest(name.get(i)));
+                    break;
+
+                case "騎士":
+                    AllyParty.AppendPlayer(new Knight(name.get(i)));
                     break;
 
                 default:
@@ -193,5 +207,25 @@ public class BattleStart extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        //敵パーティ作成
+        Party EnemyParty = new EnemyList().GetEnemy();
+
+        EnemyName1.setText(EnemyParty.GetPlayerName(0));
+        EnemyName2.setText(EnemyParty.GetPlayerName(1));
+        EnemyName3.setText(EnemyParty.GetPlayerName(2));
+        EnemyJob1.setText(EnemyParty.GetPlayerJob(0));
+        EnemyJob2.setText(EnemyParty.GetPlayerJob(1));
+        EnemyJob3.setText(EnemyParty.GetPlayerJob(2));
+        EnemyStatus1.setText(EnemyParty.GetPlayerStatus(0));
+        EnemyStatus2.setText(EnemyParty.GetPlayerStatus(1));
+        EnemyStatus3.setText(EnemyParty.GetPlayerStatus(2));
+
+    }
+
 
 }

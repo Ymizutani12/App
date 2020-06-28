@@ -8,6 +8,7 @@ public class MagicManegement {
 	//魔法使いのリスト
 	protected ArrayList<Magic> WizardList;
 	protected ArrayList<Magic> PriestList;
+	protected ArrayList<Magic> KnightList;
 
 	//コンストラクタ
 	public MagicManegement() {
@@ -28,6 +29,13 @@ public class MagicManegement {
 				add(new MagicParalys("パライズ"));
 				add(new MagicPoison("ポイズン"));
 
+			}
+		};
+
+		//騎士の魔法リスト
+		KnightList = new ArrayList<Magic>() {
+			{
+				add(new MagicHeal("ヒール"));
 			}
 		};
 

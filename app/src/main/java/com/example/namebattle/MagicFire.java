@@ -24,7 +24,7 @@ public class MagicFire extends Magic {
 
 		effectplayer.Damage(damage);
 
-		System.out.println(effectplayer.GetName() + "に" + damage + "のダメージ");
+		BattleMain.BuildLog(effectplayer.GetName() + "に" + damage + "のダメージ");
 
 		return;
 

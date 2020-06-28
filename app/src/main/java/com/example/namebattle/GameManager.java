@@ -1,8 +1,7 @@
 package com.example.namebattle;
 
-import android.widget.TextView;
-
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GameManager {
 
@@ -83,10 +82,12 @@ public class GameManager {
 		BattleMain.BuildLog("----------------------------------------------------------------\n");
 		BattleMain.BuildLog("--- ターン" + TurnNumber + " ---\n");
 
+		Random r = new Random();
+
 		// ■速い順ばんに攻撃
 		for (Player Attacker : SpeedList) {
 
-			if(Attacker.GetHP() > 0 && !LifeJudge()) {
+			if(Attacker.GetHP() > 0 && !LifeJudge() && !(Attacker.ActionJudge())) {
 
 				//プレイヤーがどっちのチームか判定して攻撃
 				for (int i = 0; i < AllyParty.GetMembers().size(); i++) {
@@ -103,15 +104,18 @@ public class GameManager {
 
 					if (Attacker.GetName().equals(EnemyParty.GetMembers().get(i).GetName())) {
 
+						EnemyParty.SetTacticsNumber(r.nextInt(EnemyParty.TacticsList.size()));
+
 						EnemyParty.MemberAction(Attacker.GetName(), AllyParty);
 
 					}
 				}
 
+				Attacker.AfterDamage();
+
 			}
 
 		}
-
 
 
 		BattleMain.BuildLog("----------------------------------------------------------------");

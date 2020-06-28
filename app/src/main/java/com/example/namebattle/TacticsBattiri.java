@@ -3,6 +3,8 @@ package com.example.namebattle;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.crypto.spec.DESedeKeySpec;
+
 public class TacticsBattiri extends Tactics{
 
 	protected TacticsBattiri(){
@@ -21,33 +23,23 @@ public class TacticsBattiri extends Tactics{
 
 			Random r = new Random();
 
-			//攻撃するプレイヤーをランダムで決める
-			int defnumber ;
-
-			while(true){
-
-				defnumber = r.nextInt(DefenceParty.GetMembers().size());
-
-				if(DefenceParty.GetMembers().get(defnumber).GetHP() > 0 ){
-					break;
-				}
-
-			}
-
-
 			//HPが一番減っている人を選ぶ
 			for (Player p : Attackmember) {
+
+				if(lowHPplayer == null && p.GetHP() > 0){
+					lowHPplayer = p;
+					continue;
+				}
 
 				if (lowHPplayer.GetMaxHP() - lowHPplayer.GetHP() < p.GetMaxHP() - p.GetHP() && p.GetHP() > 0) {
 
 					lowHPplayer = p;
 
 				}
-
 			}
 
 			//魔法があるか、HPが半分以上減っている人がいれば回復魔法を探し回復
-			if (Actionplayer.GetMagicList().size() > 0 && lowHPplayer.GetHP() /2 > lowHPplayer.GetHP()) {
+			if (Actionplayer.GetMagicList().size() > 0 ) {
 
 				for (Magic m : Actionplayer.GetMagicList()) {
 
@@ -64,14 +56,14 @@ public class TacticsBattiri extends Tactics{
 
 				}
 				//回復がない場合
-				Actionplayer.MagicAction(DefenceParty.GetMembers().get(defnumber));
+				Actionplayer.MagicAction(SelectPlayer(DefenceParty));
 				return;
 
 			}
 
 			//回復に該当しない場合通常攻撃
 
-			Actionplayer.Attack(DefenceParty.GetMembers().get(defnumber));
+			Actionplayer.Attack(SelectPlayer(DefenceParty));
 
 			return;
 

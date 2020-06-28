@@ -25,8 +25,8 @@ public class MagicHeal extends Magic{
 				int kaihuku = 50;
 				
 				effectplayer.Heal(kaihuku);
-				
-				System.out.println(effectplayer.GetName() + "は" + kaihuku + "の回復");
+
+				BattleMain.BuildLog(effectplayer.GetName() + "は" + kaihuku + "の回復");
 				
 				return;
 				

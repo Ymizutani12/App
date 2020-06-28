@@ -91,11 +91,11 @@
                 android:text="僧侶" />
 
             <RadioButton
-                android:id="@+id/esi"
+                android:id="@+id/Knight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="香具師" />
+                android:text="騎士" />
 
         </RadioGroup>
 

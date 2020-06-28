@@ -119,6 +119,10 @@ public class creat extends AppCompatActivity {
                         createplayer = new Priest(text);
                         break;
 
+                    case "騎士":
+                        createplayer = new Knight(text);
+                        break;
+
                     default:
                         createplayer = new Fighter(text);
 
