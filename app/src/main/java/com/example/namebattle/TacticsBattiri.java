@@ -18,25 +18,8 @@ public class TacticsBattiri extends Tactics{
 		protected void Action(Player Actionplayer, ArrayList<Player> Attackmember, Party DefenceParty) {
 
 			
-			//初期化
-			Player lowHPplayer = null;
-
-			Random r = new Random();
-
-			//HPが一番減っている人を選ぶ
-			for (Player p : Attackmember) {
-
-				if(lowHPplayer == null && p.GetHP() > 0){
-					lowHPplayer = p;
-					continue;
-				}
-
-				if (lowHPplayer.GetMaxHP() - lowHPplayer.GetHP() < p.GetMaxHP() - p.GetHP() && p.GetHP() > 0) {
-
-					lowHPplayer = p;
-
-				}
-			}
+			//一番HPの少ない人を選択
+			Player lowHPplayer =  SelectLowPlayer(Attackmember);
 
 			//魔法があるか、HPが半分以上減っている人がいれば回復魔法を探し回復
 			if (Actionplayer.GetMagicList().size() > 0 ) {
@@ -47,7 +30,7 @@ public class TacticsBattiri extends Tactics{
 
 						if (Actionplayer.GetMP() - m.GetMP() >= 0) {
 							
-							Actionplayer.HealAction(lowHPplayer);
+							Actionplayer.HealAction(lowHPplayer,SelectPlayer(DefenceParty));
 							
 							return;
 						}

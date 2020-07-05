@@ -2,10 +2,10 @@ package com.example.namebattle;
 
 import java.util.ArrayList;
 
+//魔法管理
 public class MagicManegement {
 
 	//メンバ変数
-	//魔法使いのリスト
 	protected ArrayList<Magic> WizardList;
 	protected ArrayList<Magic> PriestList;
 	protected ArrayList<Magic> KnightList;

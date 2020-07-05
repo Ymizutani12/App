@@ -3,6 +3,8 @@ package com.example.namebattle;
 import java.util.ArrayList;
 import java.util.Random;
 
+//ゲーム進行クラス
+//テキストはバトルメイン画面のバトルログに送る
 public class GameManager {
 
 
@@ -35,6 +37,7 @@ public class GameManager {
 	}
 
 
+	//コンストラクタ
 	public GameManager(Party Party1,Party Party2){
 
 		AllyParty = Party1;
@@ -70,6 +73,7 @@ public class GameManager {
 	}
 
 
+	//1ターン進める
 	protected void TurnOne() {
 
 
@@ -111,6 +115,7 @@ public class GameManager {
 					}
 				}
 
+				//毒ダメージの処理
 				Attacker.AfterDamage();
 
 			}
@@ -128,28 +133,29 @@ public class GameManager {
 //どちらかのパーティメンバーがゼロになったら終了
 	protected boolean LifeJudge(){
 
-		int count = 0;
-
-		for(Player deatP : AllyParty.GetMembers()){
-
-			if(deatP.GetHP() <= 0){
-				count++;
+		int count ;
+		ArrayList<Party> list = new ArrayList<Party>(){
+			{
+				add(AllyParty);
+				add(EnemyParty);
 			}
-		}
-		if(count == 3){
-			return true;
-		}
+		};
 
-		count = 0;
+		//どちらかのパーティが全滅してたらtrue
+		for(Party p : list){
 
-		for(Player deatP : EnemyParty.GetMembers()){
+			count = 0;
 
-			if(deatP.GetHP() <= 0){
-				count++;
+			for(Player deatP : p.GetMembers()){
+
+				if(deatP.GetHP() <= 0){
+					count++;
+				}
 			}
-		}
-		if(count == 3){
-			return true;
+			if(count == 3){
+				return true;
+			}
+
 		}
 
 		return false;

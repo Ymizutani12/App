@@ -3,11 +3,9 @@ package com.example.namebattle;
 import java.util.ArrayList;
 import java.util.Random;
 
+// プレイヤー：騎士
 public class Knight extends Player {
 
-    // =======================
-    // フィールド変数
-    // =======================
 
     // =======================
     // コンストラクタ
@@ -132,6 +130,7 @@ public class Knight extends Player {
     //回復行動
     protected void HealAction(Player effectplayer, Player defender) {
 
+        //回復を探し指定されたプレイヤーを回復させる
         for(Magic m : this.magiclist) {
 
             if(m instanceof MagicHeal && m.GetMP()<= this.mp) {

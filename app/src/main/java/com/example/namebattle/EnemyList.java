@@ -100,7 +100,7 @@ public class EnemyList {
 
 
         for(int i=0; i<3; i++){
-            taihi = r.nextInt(kari.size()-1);
+            taihi = r.nextInt(kari.size());
 
             switch (r.nextInt(4)){
 

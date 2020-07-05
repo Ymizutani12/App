@@ -2,13 +2,10 @@ package com.example.namebattle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Switch;
 import android.widget.Toast;
 
 public class TacticsSelect extends AppCompatActivity {
@@ -28,6 +25,7 @@ public class TacticsSelect extends AppCompatActivity {
 
                 int checkedId = radioGroup.getCheckedRadioButtonId();
 
+                //選択されたさくせんをセット
                 if (checkedId != -1 ) {
 
                     switch (checkedId){

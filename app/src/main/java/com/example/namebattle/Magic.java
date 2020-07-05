@@ -54,32 +54,5 @@ public class Magic implements Serializable {
 		
 	}
 
-/*
-	@Override
-	public int describeContents() {
-		return 0;
-	}
 
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(this.name);
-		dest.writeInt(this.mp);
-	}
-
-	protected Magic(Parcel in) {
-		this.name = in.readString();
-		this.mp = in.readInt();
-	}
-
-	public static final Creator<Magic> CREATOR = new Creator<Magic>() {
-		@Override
-		public Magic createFromParcel(Parcel source) {
-			return new Magic(source);
-		}
-
-		@Override
-		public Magic[] newArray(int size) {
-			return new Magic[size];
-		}
-	};*/
 }

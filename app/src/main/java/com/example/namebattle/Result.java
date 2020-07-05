@@ -39,25 +39,26 @@ public class Result extends AppCompatActivity {
         TextView EnemyText2 = findViewById(R.id.EnemyBox2);
         TextView EnemyText3 = findViewById(R.id.EnemyBox3);
 
+        //ステータス表示
         MemberText1.setText(StatusBuilder(AllyParty.members.get(0)));
         MemberText2.setText(StatusBuilder(AllyParty.members.get(1)));
         MemberText3.setText(StatusBuilder(AllyParty.members.get(2)));
-
         EnemyText1.setText(StatusBuilder(EnemyParty.members.get(0)));
         EnemyText2.setText(StatusBuilder(EnemyParty.members.get(1)));
         EnemyText3.setText(StatusBuilder(EnemyParty.members.get(2)));
 
+        //HPが0なら表示をグレーアウト
         MemberText1.setBackgroundResource(AllyParty.members.get(0).GetHP() <= 0 ? R.drawable.text_waku_dre : R.drawable.text_waku);
         MemberText2.setBackgroundResource(AllyParty.members.get(1).GetHP() <= 0 ? R.drawable.text_waku_dre : R.drawable.text_waku);
         MemberText3.setBackgroundResource(AllyParty.members.get(2).GetHP() <= 0 ? R.drawable.text_waku_dre : R.drawable.text_waku);
-
         EnemyText1.setBackgroundResource(EnemyParty.members.get(0).GetHP() <= 0 ? R.drawable.text_waku_dre : R.drawable.text_waku);
         EnemyText2.setBackgroundResource(EnemyParty.members.get(1).GetHP() <= 0 ? R.drawable.text_waku_dre : R.drawable.text_waku);
         EnemyText3.setBackgroundResource(EnemyParty.members.get(2).GetHP() <= 0 ? R.drawable.text_waku_dre : R.drawable.text_waku);
 
         ImageView image = findViewById(R.id.imageView);
 
-        if(AllyParty.GetMembers().get(0).GetHP() <= 0 && AllyParty.GetMembers().get(1).GetHP() <= 0 && AllyParty.GetMembers().get(1).GetHP() <= 0 ){
+        //勝ち負けの条件で画像表示変更
+        if(AllyParty.GetMembers().get(0).GetHP() <= 0 && AllyParty.GetMembers().get(1).GetHP() <= 0 && AllyParty.GetMembers().get(2).GetHP() <= 0 ){
 
             image.setImageResource(R.drawable.pose_lose_boy);
 
@@ -110,6 +111,7 @@ public class Result extends AppCompatActivity {
 
     }
 
+    //ステータス表示のテンプレ
     private StringBuilder StatusBuilder(Player p){
 
         StringBuilder builder = new StringBuilder();

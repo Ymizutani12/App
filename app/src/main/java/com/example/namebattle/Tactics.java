@@ -41,31 +41,33 @@ public class Tactics implements Serializable {
 		return DefenceParty.GetMembers().get(defnumber);
 	}
 
+	//一番HPが減っているキャラを選択
+	protected Player SelectLowPlayer(ArrayList<Player> list){
 
-	/*public Tactics() {
-	}
+		Player lowHPplayer = null;
 
-	@Override
-	public int describeContents() {
-		return 0;
-	}
+		//HPがあるプレイヤーを格納
+		for (Player p : list) {
 
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-	}
-
-	protected Tactics(Parcel in) {
-	}
-
-	public static final Creator<Tactics> CREATOR = new Creator<Tactics>() {
-		@Override
-		public Tactics createFromParcel(Parcel source) {
-			return new Tactics(source);
+			if(lowHPplayer == null && p.GetHP() > 0){
+			 	lowHPplayer = p;
+				break;
+			}
 		}
 
-		@Override
-		public Tactics[] newArray(int size) {
-			return new Tactics[size];
+		//HPが0以外で一番低いプレイヤーを選ぶ
+		for (Player p : list) {
+
+			if (lowHPplayer.GetMaxHP() - lowHPplayer.GetHP() < p.GetMaxHP() - p.GetHP() && p.GetHP() > 0) {
+
+				lowHPplayer = p;
+
+			}
+
 		}
-	};*/
+
+		return lowHPplayer;
+
+	}
+
 }

@@ -3,12 +3,10 @@ package com.example.namebattle;
 import java.util.ArrayList;
 import java.util.Random;
 
-// プレイヤー：戦士
+// プレイヤー：魔法使い
 public class Wizard extends Player {
 
-	// =======================
-	// フィールド変数
-	// =======================
+
 
 	// =======================
 	// コンストラクタ
@@ -17,9 +15,7 @@ public class Wizard extends Player {
 		super(name);
 	}
 
-	// =======================
-	// Getter / Setter
-	// =======================
+	//職業名を返す
 	@Override
 	public String GetJOB(){
 
@@ -80,6 +76,7 @@ public class Wizard extends Player {
 	}
 	
 	  //魔法行動
+	@Override
     protected void MagicAction(Player effectplayer) {
     	
     	Random r = new Random();
@@ -87,6 +84,8 @@ public class Wizard extends Player {
     	int magicnumber=0;
     	
     	//魔法をランダム選択してmp確認して使用
+		//mpがない場合は他に使える魔法があるか探す
+		//回復魔法が選択された場合自分にかける
     	for(int i=0; i<this.magiclist.size(); i++) {
     		
     		if(list.size()<=1) {
@@ -114,8 +113,7 @@ public class Wizard extends Player {
     	}
     	
     	Attack(effectplayer);
-    	
-    	//オーバーライド
+
     	return;
     	
     }

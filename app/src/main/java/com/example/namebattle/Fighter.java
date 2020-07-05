@@ -5,11 +5,6 @@ import java.util.ArrayList;
 // プレイヤー：戦士
 public class Fighter extends Player {
 
-	// =======================
-	// フィールド変数
-	// =======================
-
-
 
 	// =======================
 	// コンストラクタ
@@ -22,6 +17,7 @@ public class Fighter extends Player {
 	// Getter / Setter
 	// =======================
 
+	//職業名を返す
 	@Override
 	public String GetJOB(){
 
@@ -78,11 +74,5 @@ public class Fighter extends Player {
 		}
 	}
 
-	// =======================
-	// private メソッド
-	// =======================
 
-	// =======================
-	// public メソッド
-	// =======================
 }

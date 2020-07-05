@@ -28,6 +28,8 @@ public class BattleStart extends AppCompatActivity {
     private ArrayList<String> job ;
     private ArrayList<String> status ;
 
+    Party EnemyParty;
+
     TextView EnemyName1 , EnemyName2  ,EnemyName3 ;
     TextView EnemyJob1 ,  EnemyJob2   ,EnemyJob3  ;
     TextView EnemyStatus1,EnemyStatus2,EnemyStatus3;
@@ -143,7 +145,7 @@ public class BattleStart extends AppCompatActivity {
 
 
         //敵パーティ作成
-        final Party EnemyParty = new EnemyList().GetEnemy();
+        EnemyParty = new EnemyList().GetEnemy();
 
         EnemyName1.setText(EnemyParty.GetPlayerName(0));
         EnemyName2.setText(EnemyParty.GetPlayerName(1));
@@ -174,7 +176,7 @@ public class BattleStart extends AppCompatActivity {
             public void onClick(View v) {
 
                 //敵パーティ作成
-                Party EnemyParty = new EnemyList().GetEnemy();
+                EnemyParty = new EnemyList().GetEnemy();
 
                 EnemyName1.setText(EnemyParty.GetPlayerName(0));
                 EnemyName2.setText(EnemyParty.GetPlayerName(1));
@@ -213,7 +215,7 @@ public class BattleStart extends AppCompatActivity {
         super.onRestart();
 
         //敵パーティ作成
-        Party EnemyParty = new EnemyList().GetEnemy();
+        EnemyParty = new EnemyList().GetEnemy();
 
         EnemyName1.setText(EnemyParty.GetPlayerName(0));
         EnemyName2.setText(EnemyParty.GetPlayerName(1));

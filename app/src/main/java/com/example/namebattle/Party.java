@@ -14,11 +14,9 @@ public class Party implements Parcelable {
 	//パーティが管理するメンバー
 	protected ArrayList<Player> members;
 
-
 	//作戦一覧
 	protected ArrayList<Tactics> TacticsList;
-	
-	
+
 	//現在の作戦番号
 	private int Tacticsnumber=0;
 	
@@ -82,6 +80,7 @@ public class Party implements Parcelable {
 		}
 	}
 
+	//現在の作戦番号を返す
 	protected int GetTacticsNumber(){
 
 		return Tacticsnumber;
@@ -104,12 +103,6 @@ public class Party implements Parcelable {
 
 	// =======================
 	// protected メソッド
-	// =======================
-	// =======================
-	// private メソッド
-	// =======================
-	// =======================
-	// public メソッド
 	// =======================
 	/**
 	* パーティーにプレイヤーを追加する
@@ -146,7 +139,6 @@ public class Party implements Parcelable {
 			p.Reset();
 
 		}
-
 
 	}
 

@@ -26,7 +26,6 @@ public class CustomOpenHelper extends SQLiteOpenHelper {
 
 
 
-
     String SQL_CREATE_ENTRIES = "CREATE TABLE " + TABLE_NAME + " ("
             + NAME + " TEXT PRIMARY KEY,"
             + JOB + " TEXT,"
@@ -37,7 +36,6 @@ public class CustomOpenHelper extends SQLiteOpenHelper {
             + AGI + " INTEGER,"
             + LUCK + " INTEGER,"
             + CREATE_AT + " INTEGER)";
-
 
 
     private static final String SQL_DELETE_ENTRIES =

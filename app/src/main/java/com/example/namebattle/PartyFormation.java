@@ -64,6 +64,7 @@ public class PartyFormation extends AppCompatActivity {
 
                     int count=0 ;
 
+                    //現在のチェック状況をカウント
                     for(int i=0 ; i < checkList.size(); i++) {
 
                         if (checkList.get(i)) {
@@ -73,15 +74,18 @@ public class PartyFormation extends AppCompatActivity {
 
                         CheckBox check = view.findViewById(R.id.checkBox);
 
+                    //チェックが3つ付いていてチェックを入れると強制チェック解除、エラー表示する
                         if(count >= 3 && isChecked){
                             check.setChecked(false);
                             Toast.makeText(getApplicationContext() , "パーティーメンバーは3人までです", Toast.LENGTH_LONG).show();
                         }else{
 
+                            //状態をマップに記録
                             checkList.put(position,isChecked);
 
                         }
 
+                        //上記処理をした上で現在の状態をカウント
                         count=0;
                     for(int i=0 ; i < checkList.size(); i++) {
 
@@ -89,12 +93,12 @@ public class PartyFormation extends AppCompatActivity {
                             count++;
                         }
                     }
+
+                    //ボタンのテキスト更新
                     Button ButtleButton = findViewById(R.id.battleButton);
                     ButtleButton.setText("このパーティで開始(" + count + "/3)");
 
-
                     }
-
             });
             return view;
         }
@@ -106,8 +110,6 @@ public class PartyFormation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_party_formation);
 
-        Button returnButton = findViewById(R.id.modoru);
-
         if(helper == null){
             helper = new CustomOpenHelper(getApplicationContext());
         }
@@ -117,6 +119,7 @@ public class PartyFormation extends AppCompatActivity {
         }
 
 
+        //データベースからキャラ一覧取得
         Cursor cursor = db.query(
                 "CHARACTERS",
                 new String[] { "name","job","hp","mp","str","def","agi" },
@@ -171,6 +174,7 @@ public class PartyFormation extends AppCompatActivity {
 
                 int count=0 ;
 
+                //3人チェックしているか確認
                 for(int i=0 ; i < adapter.checkList.size(); i++) {
 
                     if (adapter.checkList.get(i)) {
@@ -178,6 +182,7 @@ public class PartyFormation extends AppCompatActivity {
                     }
                 }
 
+                //3人チェックしてたらデータベースからデータを取り出し次画面へ
                 if(count >= 3){
                     ArrayList<String> member = new ArrayList<String>();
 
@@ -219,6 +224,8 @@ public class PartyFormation extends AppCompatActivity {
 
         });
 
+        //戻るボタンの処理
+        Button returnButton = findViewById(R.id.modoru);
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -95,12 +95,12 @@ public class syousai extends AppCompatActivity {
         textView.setText(sbuilder.toString());
 
         //削除メソッドの処理
+        //データベースから削除
         Delete.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 db.delete("CHARACTERS", "name = ?", new String[]{name});
-
                 finish();
             }
         });

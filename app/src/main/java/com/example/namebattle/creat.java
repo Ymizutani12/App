@@ -13,10 +13,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 
 public class creat extends AppCompatActivity {
 
@@ -49,21 +45,22 @@ public class creat extends AppCompatActivity {
                 text = editText.getText().toString();
                 checkedId = radioGroup.getCheckedRadioButtonId();
 
+                //未入力や文字数チェックする
                 if (checkedId != -1 ) {
-
                     if(!(text.equals(""))){
-                        Createmethod();
+                        if(text.length() <= 20){
+                            Createmethod();
+
+                        }else{
+                            Toast.makeText(getApplicationContext(), "最大文字数は20文字です", Toast.LENGTH_LONG).show();
+                        }
                     }else{
                         Toast.makeText(getApplicationContext(), "名前が入力されていません", Toast.LENGTH_LONG).show();
                     }
-
                 } else {
                     // 何も選択されていない場合の処理
                     Toast.makeText(getApplicationContext(), "職業が選択されていません", Toast.LENGTH_LONG).show();
-
                 }
-
-
             }
 
         });
@@ -73,8 +70,6 @@ public class creat extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplication(), charList.class);
-                startActivity(intent);
                 finish();
             }
         });

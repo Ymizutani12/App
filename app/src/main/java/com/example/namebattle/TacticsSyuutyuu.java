@@ -2,6 +2,7 @@ package com.example.namebattle;
 
 import java.util.ArrayList;
 
+//集中攻撃作戦
 public class TacticsSyuutyuu extends Tactics {
 
     protected TacticsSyuutyuu() {

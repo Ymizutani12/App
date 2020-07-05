@@ -37,7 +37,6 @@ public class charList extends AppCompatActivity {
         setContentView(R.layout.activity_char_list);
 
 
-
         //戻るボタンで一つ前のアクティビティ
         Button returnButton = findViewById(R.id.modoru);
         returnButton.setOnClickListener(new View.OnClickListener() {

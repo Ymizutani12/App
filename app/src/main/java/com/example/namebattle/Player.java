@@ -196,18 +196,11 @@ public class Player implements Serializable {
 		return 0;
 	}
 
-	// =======================
-	// private メソッド
-	// =======================
-
-	// =======================
-	// public メソッド
-	// =======================
 	/**
 	 * 現在のステータスを返す
 	 * @return
 	 */
-	public String GetStatus() {
+	protected String GetStatus() {
 		return ("HP:" + GetHP()
 				+ " MP:" + GetMP()
 				+ " STR:" + GetSTR()
@@ -219,8 +212,8 @@ public class Player implements Serializable {
 	 * 対象プレイヤーに攻撃を行う
 	 * @param defender : 対象プレイヤー
 	 */
-	public void Attack(Player defender) {
-		// ジョブごとにオーバーライドして処理を記述してください
+	protected void Attack(Player defender) {
+		// ジョブごとにオーバーライドして処理を記述
 	}
 
 	/**
@@ -274,7 +267,7 @@ public class Player implements Serializable {
 	}
 
 	//回復行動
-	protected void HealAction(Player effectplayer) {
+	protected void HealAction(Player effectplayer, Player defender){
 
 		Attack(effectplayer);
 
@@ -311,6 +304,8 @@ public class Player implements Serializable {
 		return;
 	}
 
+
+	//キャラクターのステータスをリセットする
 	protected void Reset(){
 
 		MakeCharacter();

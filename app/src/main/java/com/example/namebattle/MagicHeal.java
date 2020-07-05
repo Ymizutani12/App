@@ -1,5 +1,6 @@
 package com.example.namebattle;
 
+//回復魔法
 public class MagicHeal extends Magic{
 
 	

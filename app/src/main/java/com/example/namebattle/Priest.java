@@ -3,6 +3,7 @@ package com.example.namebattle;
 import java.util.ArrayList;
 import java.util.Random;
 
+// プレイヤー：僧侶
 public class Priest extends Player {
 
 	// =======================
@@ -88,6 +89,8 @@ public class Priest extends Player {
 		int magicnumber=0;
 
 		//魔法をランダム選択してmp確認して使用
+		//mpがない場合は他に使える魔法があるか探す
+		//回復魔法が選択された場合自分にかける
 		for(int i=0; i<this.magiclist.size(); i++) {
 
 			if(list.size()<=1) {
@@ -132,6 +135,7 @@ public class Priest extends Player {
 	//回復行動
 	protected void HealAction(Player effectplayer, Player defender) {
 
+		//回復を探し指定されたプレイヤーに回復魔法を使う
 		for(Magic m : this.magiclist) {
 
 			if(m instanceof MagicHeal && m.GetMP()<= this.mp) {

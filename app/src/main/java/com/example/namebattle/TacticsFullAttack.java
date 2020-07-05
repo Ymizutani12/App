@@ -3,6 +3,7 @@ package com.example.namebattle;
 import java.util.ArrayList;
 import java.util.Random;
 
+//ガンガン攻める作戦
 public class TacticsFullAttack extends Tactics{
 
 	protected TacticsFullAttack(){

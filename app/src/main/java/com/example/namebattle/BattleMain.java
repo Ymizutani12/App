@@ -11,10 +11,16 @@ import android.widget.TextView;
 
 public class BattleMain extends AppCompatActivity {
 
+    //static変数
+
+    //バトルログ
+    static TextView Log;
+    //味方作戦セット用
+    static int TacticsNumber;
+
+
     Party AllyParty;
     Party EnemyParty;
-    static TextView Log;
-    static int TacticsNumber;
     GameManager GameMaster;
     TextView MemberText1, MemberText2, MemberText3;
     TextView EnemyText1 , EnemyText2 , EnemyText3 ;
@@ -29,33 +35,54 @@ public class BattleMain extends AppCompatActivity {
         AllyParty = getIntent().getParcelableExtra("ALLYPARTY");
         EnemyParty = getIntent().getParcelableExtra("ENEMYPARTY");
 
-
+        //ゲーム進行クラスがない場合作成
         if(GameMaster == null ){
-
             GameMaster = new GameManager(AllyParty,EnemyParty);
-
         }
 
         Log = findViewById(R.id.BattleLog);
         TacticsNumber = 0;
 
+        //初期の作戦セット画面
+        Intent intent = new Intent(getApplication(), TacticsSelect.class);
+        startActivity(intent);
+
+        //初期ステータス表示
+        MemberText1 = findViewById(R.id.MemberBox1);
+        MemberText2 = findViewById(R.id.MemberBox2);
+        MemberText3 = findViewById(R.id.MemberBox3);
+        EnemyText1 = findViewById(R.id.EnemyBox1);
+        EnemyText2 = findViewById(R.id.EnemyBox2);
+        EnemyText3 = findViewById(R.id.EnemyBox3);
+
+        MemberText1.setText(StatusBuilder(GameMaster.GetAlly().members.get(0)));
+        MemberText2.setText(StatusBuilder(GameMaster.GetAlly().members.get(1)));
+        MemberText3.setText(StatusBuilder(GameMaster.GetAlly().members.get(2)));
+
+        EnemyText1.setText(StatusBuilder(GameMaster.GetEnemy().members.get(0)));
+        EnemyText2.setText(StatusBuilder(GameMaster.GetEnemy().members.get(1)));
+        EnemyText3.setText(StatusBuilder(GameMaster.GetEnemy().members.get(2)));
+
+
+        //ボタンが押されたら作戦セット画面へ
         TacticsSelectChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent intent = new Intent(getApplication(), TacticsSelect.class);
-
                 startActivity(intent);
 
             }
         });
 
+        //次のターンへ進める
         NextTurnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 GameMaster.TurnOne();
 
+                //ステータス更新
                 MemberText1.setText(StatusBuilder(GameMaster.GetAlly().members.get(0)));
                 MemberText2.setText(StatusBuilder(GameMaster.GetAlly().members.get(1)));
                 MemberText3.setText(StatusBuilder(GameMaster.GetAlly().members.get(2)));
@@ -64,6 +91,7 @@ public class BattleMain extends AppCompatActivity {
                 EnemyText2.setText(StatusBuilder(GameMaster.GetEnemy().members.get(1)));
                 EnemyText3.setText(StatusBuilder(GameMaster.GetEnemy().members.get(2)));
 
+                //どちらかのパーティーが全滅したらバトル結果へ
                 if(GameMaster.LifeJudge()){
                     Intent i = new Intent(getApplicationContext(),Result.class);
 
@@ -86,25 +114,8 @@ public class BattleMain extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        MemberText1 = findViewById(R.id.MemberBox1);
-        MemberText2 = findViewById(R.id.MemberBox2);
-        MemberText3 = findViewById(R.id.MemberBox3);
-        EnemyText1 = findViewById(R.id.EnemyBox1);
-        EnemyText2 = findViewById(R.id.EnemyBox2);
-        EnemyText3 = findViewById(R.id.EnemyBox3);
-
+        //作戦の反映、画面更新
         GameMaster.SetTactics(TacticsNumber);
-
-        MemberText1.setText(StatusBuilder(GameMaster.GetAlly().members.get(0)));
-        MemberText2.setText(StatusBuilder(GameMaster.GetAlly().members.get(1)));
-        MemberText3.setText(StatusBuilder(GameMaster.GetAlly().members.get(2)));
-
-        EnemyText1.setText(StatusBuilder(GameMaster.GetEnemy().members.get(0)));
-        EnemyText2.setText(StatusBuilder(GameMaster.GetEnemy().members.get(1)));
-        EnemyText3.setText(StatusBuilder(GameMaster.GetEnemy().members.get(2)));
-
-
-
         TextView tactics = findViewById(R.id.Tactics);
 
         switch (GameMaster.GetAlly().GetTacticsNumber()){
@@ -132,11 +143,10 @@ public class BattleMain extends AppCompatActivity {
         }
 
 
-
-
     }
 
 
+    //ステータス表示のテンプレ
     private StringBuilder StatusBuilder(Player p){
 
         StringBuilder builder = new StringBuilder();
@@ -161,7 +171,7 @@ public class BattleMain extends AppCompatActivity {
 
     }
 
-
+    //バトルログの更新メソッド
     protected static void BuildLog(String log){
         StringBuilder BuilderLog = new StringBuilder();
 

@@ -16,12 +16,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //キャラ作成ボタンの処理
         Button CharButton = findViewById(R.id.charbutton);
         CharButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
+                //キャラ作成画面へ
                 Intent intent = new Intent(getApplication(), charList.class);
                 startActivity(intent);
 
@@ -29,12 +30,13 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        //バトル開始ボタンの処理
         Button BattleButton = findViewById(R.id.battlebutton);
         BattleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
+                //パーティ編成の画面へ
                 Intent intent = new Intent(getApplication(), PartyFormation.class);
                 startActivity(intent);
 
